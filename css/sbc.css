@@ -1,0 +1,173 @@
+/**********************
+sbc.css
+Copyright 2024 Derek Erb Solutions
+http://derekerb.solutions
+**********************/
+
+/*********************************************************************
+	FONTS
+
+	SANSSERIF	= 'verdana, arial, helvetica, sans-serif'
+	SERIF		= 'georgia, "times new roman", times, serif'
+*********************************************************************/
+
+@font-face {
+    font-family: 'Holingston';
+    src: url('/fonts/Holingston.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: fallback;
+}
+
+/*
+    Google fonts
+    Possible title fonts
+    Bodoni Moda
+    Kalnia
+    EB Garamond
+    Source Serif 4
+    Libre Bodoni
+    Literata
+ */
+
+/*********************************************************************
+	DEFAULTS
+*********************************************************************/
+
+:root {
+
+    --pgBack:				#F4F6F5;
+    --pgFore:				black;
+
+    --fontSS:				verdana, arial, helvetica, sans-serif;
+    --fontSerif:			georgia, "times new roman", times, serif;
+}
+
+/**********************
+	BLOCKS
+**********************/
+
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--pgBack);
+    color: var(--pgFore);
+
+    font-family:	var(--fontSS);
+
+    margin-inline:	1%;
+    font-size: calc(16px + 0.390625vi);
+    line-height: 2vb;
+}
+
+    /* --------------- Printing ----------------- */
+    @media only print {
+        body {
+            font-size: 14pt;
+        }
+    }
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+img, embed, object, video {
+    max-inline-size:	100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+div, p {
+    line-height: 1.5em;
+}
+
+/**********************
+	FOOTER
+**********************/
+
+footer {
+    margin: 4% auto 2% auto;
+    border-block-start: 1px solid var(--pgFore);
+    padding-block-start: 1%;
+    inline-size: 98%;
+    line-height: 2em;
+    font-size: 0.9em;
+
+    text-align: center;
+}
+
+    /* ---------- Smartphones ----------  */
+    @media only screen and (min-width: 320px) and (max-width: 880px) {
+        footer {
+            margin-block-start: 8%;
+            font-size: 0.75em;
+        }
+    }
+
+/**********************
+	HEADER
+**********************/
+
+header {
+    text-align: center;
+    font-family: Moniqa, var(--fontSS);
+    font-size: 4em;
+    letter-spacing: 1vb;
+    font-weight: bold;
+
+    padding: 0.25%;
+
+    margin: 1% auto;
+}
+
+/**********************
+	NAV
+**********************/
+
+nav {
+}
+
+/**********************
+	LINKS
+**********************/
+
+/**********************
+	HEADERS
+**********************/
+
+:is(h1, h2, h3, h4, h5, h6) {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.4rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4, h5, h6 {
+    font-size: 1.1rem;
+}
+
+/**********************
+	SECTIONS
+**********************/
+
+section {
+    border: 1px solid purple;
+    margin-block-end: 2%;
+}
