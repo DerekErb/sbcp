@@ -4,11 +4,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/incl/sysfuns.inc');
 
 error_reporting(E_ALL);
 
+$strLang = Site::getLang();
+
 $SBC = new SBC();
 
 $Head = new Head();
-$Head->addCSSFile('sbc.css');
 $Head->write();
+
 $SBC->writeHeader();
 
 // Description
