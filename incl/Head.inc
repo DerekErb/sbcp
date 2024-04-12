@@ -959,7 +959,7 @@ class Head extends Site
     function setTwitter(string $strTwitterDesc, ?string $strTwitterCreator = null, ?string $strTwitterCard = null) : void
     {
         $this->activateTwitter();
-        $this->strTwitterdesc       =   $strTwitterDesc;
+        $this->strTwitterDesc       =   $strTwitterDesc;
         $this->strTwitterCreator    =   $strTwitterCreator  ??  $this->arrSiteTwitterInfo['Creator'];
         $this->strTwitterCard       =   $strTwitterCard     ??  $this->arrSiteTwitterInfo['Card'];
     }
