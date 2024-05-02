@@ -22,7 +22,8 @@ class SBC extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // CONSTRUCTOR()
+    //  __construct()
+    //  Version 1.1 (30/04/2024)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -43,6 +44,7 @@ class SBC extends Site
                 break;
         }
         
+        parent::__construct();
     }
     
     function getSite() : SiteCode

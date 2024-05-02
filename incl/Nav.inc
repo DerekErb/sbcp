@@ -1,58 +1,101 @@
 <?php
 
-//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //
-//  Nav Class
-//  Version 2.0
+//  CLASS       Nav
+//  @version    2.1 (01/05/2024)
+//  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
-//  setID()
-//  write()
-//
-//////////////////////////////////////////////////////////////////////////////
-    
+/////////////////////////////////////////////////////////////////////////////
+
 class Nav
 {
-    protected string $strNavID  = 'nav';
+    private     const   NAV             =   'Nav';
+    protected   ?string $strClass       =   null;
+    protected   ?string $strCurrItem    =   null;
+    protected   ?string $strID          =   null;
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // CONSTRUCTOR()
+    //  __construct()
+    //  Version 1.1 (30/04/2024)
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function __construct($strNavID = null)
+    function __construct(?string $strClass = null, ?string $strID = null)
     {
-        if (!is_null($strNavID))
-            $this->setID($strNavID);
+        if (!is_null($strID))
+            $this->setID($strID);
+        
+        if (!is_null($strClass))
+            $this->setClass($strClass);
     }
     
-    //////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    //
+    //  setClass()
+    //  @version    1.0 (01/05/2024)
+    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  Set nav class
+    //
+    //  $param      string $strClass
+    //
+    //  EXAMPLE     setClass('Menu');
+    //
+    /////////////////////////////////////////////////////////////////////////////
+    
+    function setClass(string $strClass) : void
+    {
+        $this->strClass = self::NAV . $strClass;
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////
     //
     //  setID()
+    //  @version    1.0 (30/04/2024)
+    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set nav ID
     //
-    //////////////////////////////////////////////////////////////////////////////
+    //  $param      string $strID
+    //
+    //  EXAMPLE     setID('Menu');
+    //
+    /////////////////////////////////////////////////////////////////////////////
     
-    function setID(string $strNavID) : void
+    function setID(string $strID) : void
     {
-        $this->strNavID = $strNavID;
+        $this->strID = self::NAV . $strID;
     }
     
-    //////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
     //
     //  write()
+    //  @version    1.0 (30/04/2024)
+    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Output navigation
+    //  Output the navigation
     //
-    //////////////////////////////////////////////////////////////////////////////
+    //  $param      ?string $strCurrItem
+    //
+    //  EXAMPLE     write('navAbout')
+    //
+    /////////////////////////////////////////////////////////////////////////////
     
-    public function write() : void
+    function write(?string $strCurrItem = null) : void
     {
+        $strClass   =   is_null($this->strClass)    ?   ''  : ' class="' . $this->strClass . '" ';
+        $strID      =   is_null($this->strID)       ?   ''  : ' id="' . $this->strID . '" ';
+        
         // *** NAVigation ***
         echo(t(1) . '<!-- *** NAV *** -->' . PHP_EOL);
-        echo(t(1) . '<nav id="' . $this->strNavID . '">' . PHP_EOL);
+        echo(t(1) . '<nav ' . $strID . $strClass . '>' . PHP_EOL);
         
-        echo(t(1) . '</nav>' . PHP_EOL . PHP_EOL);
+        echo(t(1) . '</nav>' . PHP_EOP);
     }
 }
