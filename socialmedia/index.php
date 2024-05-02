@@ -15,7 +15,7 @@ $Nav = new Nav();
 $Nav->write('Social');
 
 // Social networks
-if ($SBC->getSite() == SideCode::FR) {
+if ($SBC->getSite() == SiteCode::FR) {
     echo(t(1) . '<section id="socialmedia">' . PHP_EOL);
         echo('<h2>Réseaux Sociaux</h2>');
         echo('<ul>' . PHP_EOL);
