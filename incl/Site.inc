@@ -11,7 +11,7 @@
 
 class Site
 {
-    public const            VER_NUM             =   '0.2';
+    public const            VER_NUM             =   '0.2.1';
     public const            CSS_DIR             =   '/css/';
     public const            CSV_EXP_DIR         =   '/impexp/';
     public const            CSV_IMP_DIR         =   '/impexp/';

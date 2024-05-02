@@ -89,12 +89,42 @@ class Nav
     
     function write(?string $strCurrItem = null) : void
     {
-        $strClass   =   is_null($this->strClass)    ?   ''  : ' class="' . $this->strClass . '" ';
-        $strID      =   is_null($this->strID)       ?   ''  : ' id="' . $this->strID . '" ';
+        $strClass       =   is_null($this->strClass)    ?   ''  : ' class="' . $this->strClass . '" ';
+        $strID          =   is_null($this->strID)       ?   ''  : ' id="' . $this->strID . '" ';
+        $strCurrItem    =   is_null($strCurrItem)       ?   null: $this::NAV . $strCurrItem;
         
+        $arrFolders['NavAbout']             =   'about';
+        $arrFolders['NavNewsletter']        =   'newsletter';
+        $arrFolders['NavSocial']            =   'socialmedia';
+        $arrFolders['NavSummaries']         =   'summaries';
+        
+        $SBC = new SBC();
+        switch($SBC->getSite()) {
+            case SiteCode::FR:
+                $arrMenu['NavAbout']        =   'A propos de';
+                $arrMenu['NavNewsletter']   =   'Newsletter';
+                $arrMenu['NavSocial']       =   'Réseaux sociaux';
+                $arrMenu['NavSummaries']    =   'Résumés';
+                break;
+            default:
+                $arrMenu['NavAbout']        =   'About';
+                $arrMenu['NavNewsletter']   =   'Newsletter';
+                $arrMenu['NavSocial']       =   'Social';
+                $arrMenu['NavSummaries']    =   'Summaries';
+                break;
+        }
         // *** NAVigation ***
         echo(t(1) . '<!-- *** NAV *** -->' . PHP_EOL);
         echo(t(1) . '<nav ' . $strID . $strClass . '>' . PHP_EOL);
+        
+            echo(t(2) . '<ul>' . PHP_EOL);
+                foreach($arrMenu as $strKey => $strValue) {
+                    $strCurr = ($strCurrItem == $strKey) ? ' class="current" ' : '';
+                    echo(t(3) . '<li' . $strCurr . '>' . PHP_EOL);
+                        echo(t(4) . '<a href="/' . $arrFolders[$strKey] . '">' . $strValue . '</a>' . PHP_EOL);
+                    echo(t(3) . '</li>' . PHP_EOL);
+                }
+            echo(t(2) . '</ul>' . PHP_EOL);
         
         echo(t(1) . '</nav>' . PHP_EOP);
     }

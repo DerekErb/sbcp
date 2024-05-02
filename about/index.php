@@ -12,6 +12,8 @@ $Head = new Head();
 $Head->addCSSFile('about.css');
 $Head->write();
 $SBC->writeHeader();
+$Nav = new Nav();
+$Nav->write('About');
 
 // Description
 echo(t(1) .'<section id="about">' . PHP_EOL);

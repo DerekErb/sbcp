@@ -10,8 +10,9 @@ $SBC = new SBC();
 
 $Head = new Head();
 $Head->write();
-
 $SBC->writeHeader();
+$Nav = new Nav();
+$Nav->write();
 
 // Description
     if (($SBC->getSite() !== SiteCode::EN) && ($SBC->getSite() !== SiteCode::FR)) {
@@ -57,28 +58,6 @@ $SBC->writeHeader();
                 
                 echo('<p>Caméra coupée et / ou microphone coupé sont acceptées.</p>' . PHP_EOL);
             echo(t(1) . '</section>' . PHP_EOP);
-
-            // Newsletter
-            echo(t(1) . '<section id="newsletter">' . PHP_EOL);
-                echo('<h2>Newsletter</h2>' . PHP_EOL);
-            echo(t(1) . '</section>' . PHP_EOP);
-            
-            echo(t(1) . '<section id="socialmedia">' . PHP_EOL);
-                echo('<h2>Réseaux Sociaux</h2>');
-                echo('<ul>' . PHP_EOL);
-                    echo('<li>X (Twitter)</li>' . PHP_EOL);
-                    echo('<li>Facebook</li>' . PHP_EOL);
-                    echo('<li>Instagram</li>' . PHP_EOL);
-                    echo('<li>Meetup</li>' . PHP_EOL);
-                    echo('<li>Good Reads</li>' . PHP_EOL);
-                echo('</ul>' . PHP_EOL);
-            echo(t(1) . '</section>' . PHP_EOP);
-            
-            
-            // Session Summaries
-            echo(t(1) . '<section id="summaries">' . PHP_EOL);
-                echo('<h2>Résumés des Sessions</h2>' . PHP_EOL);
-            echo(t(1) . '</section>' . PHP_EOP);
         }
         else {
             echo(t(1) .'<section id="about">' . PHP_EOL);
@@ -122,28 +101,8 @@ $SBC->writeHeader();
                 
                 echo('<p>Cameras and/or microphones are optional. Text-only chat is also possible.</p>' . PHP_EOL);
             echo(t(1) . '</section>' . PHP_EOP);
-            
-            // Newsletter
-            echo(t(1) . '<section id="newsletter">' . PHP_EOL);
-                echo('<h2>Newsletter</h2>' . PHP_EOL);
-            echo(t(1) . '</section>' . PHP_EOP);
-            
-            echo(t(1) . '<section id="socialmedia">' . PHP_EOL);
-                echo('<h2>Social Media</h2>');
-                echo('<ul>' . PHP_EOL);
-                    echo('<li>X (Twitter)</li>' . PHP_EOL);
-                    echo('<li>Facebook</li>' . PHP_EOL);
-                    echo('<li>Instagram</li>' . PHP_EOL);
-                    echo('<li>Meetup</li>' . PHP_EOL);
-                    echo('<li>Good Reads</li>' . PHP_EOL);
-                echo('</ul>' . PHP_EOL);
-            echo(t(1) . '</section>' . PHP_EOP);
         }
-        
-        // Session Summaries
-        echo(t(1) . '<section id="summaries">' . PHP_EOL);
-            echo('<h2>Session Summaries</h2>' . PHP_EOL);
-        echo(t(1) . '</section>' . PHP_EOP);
     }
+    
 $Footer = new Footer();
 $Footer->write();
