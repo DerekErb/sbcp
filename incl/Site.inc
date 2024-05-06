@@ -11,7 +11,7 @@
 
 class Site
 {
-    public const            VER_NUM             =   '0.2.1';
+    public const            VER_NUM             =   '0.2.2';
     public const            CSS_DIR             =   '/css/';
     public const            CSV_EXP_DIR         =   '/impexp/';
     public const            CSV_IMP_DIR         =   '/impexp/';
@@ -46,7 +46,7 @@ class Site
     //////////////////////////////////////////////////////////
     
     public const            DEF_COOKIE_DURATION =   8;  // days
-    public const            DEF_LANG            =   'fr';
+    public const            DEF_LANG            =   'en';
     public const            DEF_FMTDT           =   'wd';
     public const            DEF_TZONE           =   'Europe/Paris';
     public const            DEF_USERID          =   1;

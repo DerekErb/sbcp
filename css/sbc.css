@@ -51,6 +51,7 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scroll-padding: 20px;
 }
 
 body {
@@ -148,19 +149,19 @@ nav {
 }
 
 h1 {
-    font-size: 1.4rem;
+    font-size: clamp(1.4rem, 4vi, 24px);
 }
 
 h2 {
-    font-size: 1.3rem;
+    font-size: clamp(1.3rem, 3.5vi, 20px);
 }
 
 h3 {
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 3.25vi, 16px);
 }
 
 h4, h5, h6 {
-    font-size: 1.1rem;
+    font-size: clamp(1.1rem, 3vi, 14px);
 }
 
 /**********************

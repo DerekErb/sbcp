@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Nav
-//  @version    2.1 (01/05/2024)
+//  @version    2.2 (04/05/2024)
 //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
@@ -55,7 +55,7 @@ class Nav
     /////////////////////////////////////////////////////////////////////////////
     //
     //  setID()
-    //  @version    1.0 (30/04/2024)
+    //  @version    1.1 (04/05/2024)
     //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
@@ -69,7 +69,7 @@ class Nav
     
     function setID(string $strID) : void
     {
-        $this->strID = self::NAV . $strID;
+        $this->strID = $strID . self::NAV;
     }
     
     /////////////////////////////////////////////////////////////////////////////
@@ -104,27 +104,27 @@ class Nav
                 $arrMenu['NavAbout']        =   'A propos de';
                 $arrMenu['NavNewsletter']   =   'Newsletter';
                 $arrMenu['NavSocial']       =   'Réseaux sociaux';
-                $arrMenu['NavSummaries']    =   'Résumés';
+//                $arrMenu['NavSummaries']    =   'Résumés';
                 break;
             default:
                 $arrMenu['NavAbout']        =   'About';
                 $arrMenu['NavNewsletter']   =   'Newsletter';
                 $arrMenu['NavSocial']       =   'Social';
-                $arrMenu['NavSummaries']    =   'Summaries';
+//                $arrMenu['NavSummaries']    =   'Summaries';
                 break;
         }
         // *** NAVigation ***
         echo(t(1) . '<!-- *** NAV *** -->' . PHP_EOL);
         echo(t(1) . '<nav ' . $strID . $strClass . '>' . PHP_EOL);
         
-            echo(t(2) . '<ul>' . PHP_EOL);
+            echo(t(2) . '<div>' . PHP_EOL);
                 foreach($arrMenu as $strKey => $strValue) {
                     $strCurr = ($strCurrItem == $strKey) ? ' class="current" ' : '';
-                    echo(t(3) . '<li' . $strCurr . '>' . PHP_EOL);
+                    echo(t(3) . '<ul' . $strCurr . '>' . PHP_EOL);
                         echo(t(4) . '<a href="/' . $arrFolders[$strKey] . '">' . $strValue . '</a>' . PHP_EOL);
-                    echo(t(3) . '</li>' . PHP_EOL);
+                    echo(t(3) . '</div>' . PHP_EOL);
                 }
-            echo(t(2) . '</ul>' . PHP_EOL);
+            echo(t(2) . '</div>' . PHP_EOL);
         
         echo(t(1) . '</nav>' . PHP_EOP);
     }

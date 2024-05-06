@@ -70,7 +70,7 @@ class SBC extends Site
         echo(t(1) . '<header>' . PHP_EOL);
             echo(t(2) .'<div id="hero">' . PHP_EOL);
                 echo(t(3) . '<div id="headtitle">' . PHP_EOL);
-                    echo(t(4) . '<h1>' . $this->getSiteTitle() . '</h1>' . PHP_EOL);
+                    echo(t(4) . '<h1 translate="no">' . $this->getSiteTitle() . '</h1>' . PHP_EOL);
                 echo(t(3) . '</div>' . PHP_EOP);
             echo(t(2) . '</div>' . PHP_EOP);
         echo(t(1) . '</header>' . PHP_EOP);
