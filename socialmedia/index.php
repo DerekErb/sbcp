@@ -1,5 +1,14 @@
 <?php
 
+/////////////////////////////////////////////////////////////////////////////
+//
+//  SOCIAL      index
+//  @version    0.2 (13/05/2024)
+//  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
+//
+/////////////////////////////////////////////////////////////////////////////
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/incl/sysfuns.inc');
 
 error_reporting(E_ALL);

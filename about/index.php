@@ -1,5 +1,14 @@
 <?php
 
+/////////////////////////////////////////////////////////////////////////////
+//
+//  ABOUT       index
+//  @version    1.0 (13/05/2024)
+//  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
+//
+/////////////////////////////////////////////////////////////////////////////
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/incl/sysfuns.inc');
 
 error_reporting(E_ALL);
@@ -16,8 +25,6 @@ $Nav = new Nav();
 
 $Nav->write('About');
 
-echo('<h1>' . $strLang . '</h1>' . PHP_EOP);
-
 // Description
 echo(t(1) .'<section id="about">' . PHP_EOL);
 if ($strLang === 'fr') {
@@ -31,9 +38,9 @@ if ($strLang === 'fr') {
         
         echo(t(3) . '<h3>Qui lit quoi ?</h3>' . PHP_EOL);
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . "Contrairement à la plupart des clubs on ne lit pas tous le même livre. Chacun lit ce qu'il veut. On est ici
+            echo(t(4) . "Contrairement à la plupart des clubs on ne lit pas tous le même livre. On est ici
             pour lire pour notre plaisir alors on lit ce qu'on veut. Il n'y a jamais de jugement et surtout pas de culpabilité.
-            Ca peut être n'importe de quel genre :" . PHP_EOL);
+            On peut lire n'importe de quel genre :" . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
         
         echo(t(3) . '<ul>' . PHP_EOL);
@@ -55,7 +62,7 @@ if ($strLang === 'fr') {
         echo(t(3) . '</ul>' . PHP_EOP);
         
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . "Nous acceptons tous les formats et sans jugement :" . PHP_EOL);
+            echo(t(4) . "On peut lire tous les formats et sans jugement :" . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
         
         echo(t(3) . '<ul>' . PHP_EOL);
@@ -158,9 +165,8 @@ else {
         
         echo(t(3) . '<h3>Who reads what?</h3>' . PHP_EOL);
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . 'Unlike most book clubs there is no assigned reading. Everyone reads whatever they 
-                want. We are here to read for our pleasure so we read what we want. There is no judgement here and certainly
-                 no guilt. It can be any genre:' . PHP_EOL);
+            echo(t(4) . "Unlike most book clubs we don't all ready the same book. We are here to read for our personal pleasure so we read whatever we want.
+                There is no judgement here and certainly no guilt. We can read any genre:" . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
 
         echo(t(3) . '<ul>' . PHP_EOL);
@@ -180,7 +186,7 @@ else {
         echo(t(3) . '</ul>' . PHP_EOL);
         
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . 'We accept all formats with no judgement:' . PHP_EOL);
+            echo(t(4) . 'We can read any format with no judgement:' . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
         
         echo(t(3) . '<ul>' . PHP_EOL);
@@ -218,9 +224,11 @@ else {
         
         echo(t(3) . '<h3>Why online-only?</h3>' . PHP_EOL);
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . 'We wanted to start with the easiest and quickest way possible to see how all of this works and what the interest may be.
-                If everything evolves as planned, we\'re sure we\'ll eventually find ourselves with a mixture of online sessions and in-person sessions at a
-                café or bar or bookstore. They should not be that difficult to find here in Paris.' . PHP_EOL);
+            echo(t(4) . "We wanted to start with the easiest and quickest way possible to see how all of this works and what the interest may be." . PHP_EOL);
+        echo(t(3) . '</p>' . PHP_EOP);
+        echo(t(3) . '<p>' . PHP_EOL);
+            echo(t(4) . "When there will be enough of us, on a regular basis, we'll eventually find ourselves with a mixture of online sessions and in-person
+                sessions at a café or bar or bookstore. They should not be that difficult to find here in Paris." . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
         
         echo(t(3) . '<h3>How does it work?</h3>' . PHP_EOL);
@@ -260,7 +268,7 @@ else {
         echo(t(3) . '<p>' . PHP_EOL);
             echo(t(4) . 'We currently record each of our sessions, and you will hear a notification whenever
             you join one of our sessions. However these recordings are for internal use only. We rewatch our sessions
-            when e create the session summaries so as to not have to take notes during our sessions. These
+            when we create the session summaries so as to not have to take notes during our sessions. These
             recordings are never shared or published.' . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
     

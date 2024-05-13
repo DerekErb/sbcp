@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Site
-//  @version    0.1b (13/05/2024)
+//  @version    42.0.4 (13/05/2024)
 //  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //

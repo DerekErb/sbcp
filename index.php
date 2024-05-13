@@ -1,5 +1,14 @@
 <?php
 
+/////////////////////////////////////////////////////////////////////////////
+//
+//  /           index
+//  @version    1.0 (13/05/2024)
+//  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
+//
+/////////////////////////////////////////////////////////////////////////////
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/incl/sysfuns.inc');
 
 error_reporting(E_ALL);
@@ -14,7 +23,7 @@ $SBC->writeHeader();
 $Nav = new Nav();
 $Nav->write();
 
-// Description
+    // Description
     if (($SBC->getSite() !== SiteCode::EN) && ($SBC->getSite() !== SiteCode::FR)) {
         echo(t(1) .'<section id="about">' . PHP_EOL);
             echo(t(2) . 'GENERIC BILINGUAL TEXT HERE');
