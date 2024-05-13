@@ -101,7 +101,7 @@ class Nav
         $SBC = new SBC();
         switch($SBC->getSite()) {
             case SiteCode::FR:
-                $arrMenu['NavAbout']        =   'A propos de';
+                $arrMenu['NavAbout']        =   'C\'est quoi';
                 $arrMenu['NavNewsletter']   =   'Newsletter';
                 $arrMenu['NavSocial']       =   'Réseaux sociaux';
 //                $arrMenu['NavSummaries']    =   'Résumés';
@@ -115,9 +115,9 @@ class Nav
         }
         // *** NAVigation ***
         echo(t(1) . '<!-- *** NAV *** -->' . PHP_EOL);
-        echo(t(1) . '<nav ' . $strID . $strClass . '>' . PHP_EOL);
+        echo(t(1) . '<nav' . $strID . $strClass . '>' . PHP_EOL);
         
-            echo(t(2) . '<div>' . PHP_EOL);
+            echo(t(2) . '<div class="navclass">' . PHP_EOL);
                 foreach($arrMenu as $strKey => $strValue) {
                     $strCurr = ($strCurrItem == $strKey) ? ' class="current" ' : '';
                     echo(t(3) . '<ul' . $strCurr . '>' . PHP_EOL);

@@ -23,7 +23,7 @@ class SBC extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  __construct()
-    //  Version 1.1 (30/04/2024)
+    //  Version 1.2 (12/05/2024)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -32,28 +32,30 @@ class SBC extends Site
         switch($this->getSite()) {
             case SiteCode::EN:
                 $this->setTitle('English Silent Book Club Paris');
-                Site::setLang('en');
                 break;
             case SiteCode::FR:
                 $this->setTitle('Club de lecture silencieuse Paris');
-                Site::setLang('fr');
                 break;
             default:
                 $this->setTitle('Silent Book Club Paris');
-                Site::setLang('en');
+                Site::setLang(Site::DEF_LANG);
                 break;
         }
-        
+
         parent::__construct();
     }
     
     function getSite() : SiteCode
     {
         $Site = new Site();
-        if (strContains($Site->getServerName(), 'clubdelecture'))
-            return(SiteCode::FR);
-        if (strContains($Site->getServerName(), 'englishsilentbookclub'))
-            return(SiteCode::EN);
+        if (strContains($Site->getServerName(), 'clubdelecture')) {
+            Site::setLang('fr');
+            return (SiteCode::FR);
+        }
+        if (strContains($Site->getServerName(), 'englishsilentbookclub')) {
+            Site::setLang('en');
+            return (SiteCode::EN);
+        }
         return(SiteCode::GEN);
     }
     
@@ -68,10 +70,8 @@ class SBC extends Site
     function writeHeader() : void
     {
         echo(t(1) . '<header>' . PHP_EOL);
-            echo(t(2) .'<div id="hero">' . PHP_EOL);
-                echo(t(3) . '<div id="headtitle">' . PHP_EOL);
-                    echo(t(4) . '<h1 translate="no">' . $this->getSiteTitle() . '</h1>' . PHP_EOL);
-                echo(t(3) . '</div>' . PHP_EOP);
+            echo(t(2) . '<div id="headtitle">' . PHP_EOL);
+                echo(t(3) . '<h1 translate="no">' . $this->getSiteTitle() . '</h1>' . PHP_EOL);
             echo(t(2) . '</div>' . PHP_EOP);
         echo(t(1) . '</header>' . PHP_EOP);
     }

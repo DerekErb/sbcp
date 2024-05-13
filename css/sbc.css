@@ -134,6 +134,8 @@ header {
 **********************/
 
 nav {
+    border: 1px solid rebeccapurple;
+    margin-block-end: 2%;
 }
 
 /**********************
@@ -170,5 +172,11 @@ h4, h5, h6 {
 
 section {
     border: 1px solid purple;
+    padding-inline: 2%;
+    padding-block-end: 2%;
     margin-block-end: 2%;
+}
+
+p {
+    text-wrap: balance;
 }

@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Site
-//  @version    0.1a (07/03/2024)
+//  @version    0.1b (13/05/2024)
 //  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
@@ -519,8 +519,8 @@ class Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setLang()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  Version 1.1 (13/05/2024)
+    //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set Site language
@@ -534,14 +534,17 @@ class Site
     
     public static function setLang(?string $strLang = null, int $iDurDays = null) : void
     {
-        $strLang        =   $strLang ?? self::DEF_LANG;
-        $iDurDays       =   $iDurDays ?? self::DEF_COOKIE_DURATION;
-        $strCurrLang    =   self::getLang();
+        $iDurDays   =   $iDurDays   ??  self::DEF_COOKIE_DURATION;
         
-        // Set changed language cookie if headers not already sent
-        if ($strCurrLang != $strLang && !headers_sent()) {
-            setcookie('lang', $strLang, time() + (86500 * $iDurDays), '/');
-        }
+        // lang already stored
+        if (isCookie('lang'))
+            // use new lang or currently stored lang
+            $strLang ??= readCookie('lang');
+        else
+            // use new lang or default
+            $strLang ??= self::DEF_LANG;
+        
+        addcookie('lang', $strLang, $iDurDays);
     }
     
     //////////////////////////////////////////////////////////////////////////////

@@ -1422,7 +1422,7 @@ function redirect(?string $strURL = null, int $iRedirect = 302) : void
 
 //////////////////////////////////////////////////////////////////////////////
 //
-//  remCookier()
+//  remCookie()
 //  Version 1.0 (10/08/2023)
 //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
