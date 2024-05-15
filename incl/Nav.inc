@@ -95,21 +95,21 @@ class Nav
         
         $arrFolders['NavAbout']             =   'about';
         $arrFolders['NavNewsletter']        =   'newsletter';
-        $arrFolders['NavSocial']            =   'socialmedia';
+        $arrFolders['NavContact']           =   'contact';
         $arrFolders['NavSummaries']         =   'summaries';
         
         $SBC = new SBC();
         switch($SBC->getSite()) {
             case SiteCode::FR:
-                $arrMenu['NavAbout']        =   'C\'est quoi';
+                $arrMenu['NavAbout']        =   "C'est quoi";
                 $arrMenu['NavNewsletter']   =   'Newsletter';
-                $arrMenu['NavSocial']       =   'Réseaux sociaux';
+                $arrMenu['NavContact']      =   'Contact';
 //                $arrMenu['NavSummaries']    =   'Résumés';
                 break;
             default:
                 $arrMenu['NavAbout']        =   'About';
                 $arrMenu['NavNewsletter']   =   'Newsletter';
-                $arrMenu['NavSocial']       =   'Social';
+                $arrMenu['NavContact']      =   'Contact';
 //                $arrMenu['NavSummaries']    =   'Summaries';
                 break;
         }

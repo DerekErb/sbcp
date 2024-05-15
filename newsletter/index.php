@@ -35,5 +35,8 @@ else {
     echo(t(1) . '</section>' . PHP_EOP);
 }
 
+$Contact = new Contact();
+$Contact->write();
+
 $Footer = new Footer();
 $Footer->write();

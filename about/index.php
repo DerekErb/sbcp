@@ -165,7 +165,7 @@ else {
         
         echo(t(3) . '<h3>Who reads what?</h3>' . PHP_EOL);
         echo(t(3) . '<p>' . PHP_EOL);
-            echo(t(4) . "Unlike most book clubs we don't all ready the same book. We are here to read for our personal pleasure so we read whatever we want.
+            echo(t(4) . "Unlike most book clubs we don't all read the same book. We are here to read for our personal pleasure so we read whatever we want.
                 There is no judgement here and certainly no guilt. We can read any genre:" . PHP_EOL);
         echo(t(3) . '</p>' . PHP_EOP);
 
@@ -285,6 +285,9 @@ else {
     echo(t(2) . '</div>' . PHP_EOP);
 }
 echo(t(1) . '</section>' . PHP_EOP);
+
+$Contact = new Contact();
+$Contact->write();
 
 $Footer = new Footer();
 $Footer->write();
