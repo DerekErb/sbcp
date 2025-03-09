@@ -11,7 +11,7 @@ if (!getenv('SITE_VER_NUM')) {
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Site
-//  @version    43.2 (09/03/2025)
+//  @version    43.3 (09/03/2025)
 //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
