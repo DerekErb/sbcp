@@ -1,51 +1,15 @@
 <?php
 
-//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //
-//  Head Class
-//  Version 1.0
+//  CLASS       Head
+//  @version    3.0c (09/03/2025)
+//  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
-//////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////////
 class Head extends Site
 {
-    protected const     SITE_ARR_PRELOAD_FONTS          =   array(
-                                                                'roboto-regular.ttf'    =>  'ttf',
-                                                            );
-    protected const     SITE_AUTHORS                    =   'Derek Erb Solutions';
-    protected const     SITE_CONTENT_SECURITY_POLICY    =    '';
-    protected const     SITE_DESIGNER                   =   'Derek Erb Solutions';
-    protected const     SITE_GEN                        =   'Hand-coded by Derek Erb Solutions';
-    protected const     SITE_RATING                     =   'Safe For Kids';
-    
-    // SE Indexing revisit site every X days
-    protected const     SITE_SE_REVISIT                 =   14;
-    
-    protected ?array    $arrCSSFiles                    =   null;
-    protected ?array    $arrJScriptFiles                =   null;
-    protected ?array    $arrExtJSLinks                  =   null;
-    
-    protected ?array    $arrFavIcons                   =    array(
-                                                                '512x512'   => '/favicon-512x512.png',
-                                                                '192x192'   =>  '/favicon-192x192.png',
-                                                                '96x96'     =>  '/favicon-96x96.png',
-                                                                '32x32'     =>  '/favicon-32zx32.png',
-                                                                '16x16'     =>  '/favicon-16x16.png',
-                                                            );
-
-    protected ?string   $strFileName                    =   null;
-    protected string    $strNormaliseCSS                =   'normalise.css';
-    protected ?string   $strPgLangCodes                 =   null;
-    protected ?string   $strPgTitle                     =   null;
-    
-    protected ?string   $strSiteAbstract                =   null;
-    protected ?string   $strSiteDesc                    =   null;
-    protected ?string   $strSiteGoogleTag               =   null;
-    protected ?string   $strSiteKeywords                =   null;
-    
-    protected ?string   $strSiteOwner                   =   'Derek Erb Solutions';
-    protected ?string   $strSiteThemeColor              =   '#FFFFFF';
-    
     // Article Info
     protected ?string   $strArtAuthor                   =   null;
     protected ?string   $strArtExpTime                  =   null;
@@ -54,78 +18,71 @@ class Head extends Site
     protected ?string   $strArtSection                  =   null;
     protected ?string   $strArtTags                     =   null;
     
-    // Open Graph / Facebook Info
-    protected array     $arrSiteOGInfo                  =   array(
-                                                                'Image'         =>  'XXX full OG image URL',
-                                                                // Alt image description
-                                                                'ImageAlt'       =>  '',
-                                                                // Image height in pixels
-                                                                'ImageHeight'    =>  1200,
-                                                                // Image file type
-                                                                'ImageType'     =>  'image/png',
-                                                                // Image width in pixels
-                                                                'ImageWidth'      =>  600,
-                                                                'Locale'        =>  'en_US',
-                                                                'Type'          =>  'website',
-                                                            );
-
-    protected array     $arrSiteOGLocales               =   array(
-                                                                'en_GB',
-                                                                'fr_FR',
-                                                            );
-
-    protected bool      $bOpenGraph                     =   false;
-    protected ?string   $strOgDesc                      =   null;
-    protected ?string   $strOgImageAlt                  =   null;
-    protected ?int      $iOgImageHeight                 =   null;
-    protected ?int      $iOgImageWidth                  =   null;
-    protected ?string   $strOgImage                     =   null;
-    protected ?string   $strOgImageType                 =   null;
-    protected ?string   $strOgLocale                    =   null;
-    protected ?array    $arrOgLocales                   =   null;
-    protected ?string   $strOgTitle                     =   null;
-    protected ?string   $strOgType                      =   null;
-    protected ?string   $strOgURL                       =   null;
+    protected ?array    $arrCSSFiles                    =   null;
+    protected ?array    $arrExtJSLinks                  =   null;
+    protected ?string   $strFileName                    =   null;
+    protected ?array    $arrJScriptFiles                =   null;
     
-    // PWA Info
-    protected bool      $bPWA                           =   true;
-    protected ?string   $strPWAAppName                  =   null;
-    protected ?string   $strPWAManifest                 =   null;
     
-    // SEO Header Info
-    protected ?string   $strPgAbstract                  =   null;
+    // Page info
+    protected ?string   $strPgAbstract =   null;
     protected ?string   $strPgAuthors                   =   null;
     protected ?string   $strPgCopyright                 =   null;
     protected ?string   $strPgDescription               =   null;
     protected ?string   $strPgDesigner                  =   null;
     protected ?string   $strPgGenerator                 =   null;
     protected ?string   $strPgKeywords                  =   null;
+    protected ?string   $strPgLangCodes                 =   null;
     protected ?string   $strPgOwner                     =   null;
-    protected ?string   $strPgRating                    =   null;
+    protected ?string   $strPgRating   =   null;
+    protected ?string   $strPgTitle    =   null;
     
-    // Twitter Info
-    protected ?array    $arrSiteTwitterInfo             =   array(
-                                                                'Card'          =>  'summary_large_image',
-                                                                'Creator'       =>  'XXX-@twitter handle of creator',
-                                                                'Desc'          =>  'XXX-twitter description (<= 140 chars)',
-                                                                'Image'         =>  'XXX-full url of twitter image',
-                                                                'ImageAlt'      =>  'XXX-alt text for image',
-                                                                'ImageType'     =>  'image/png',
-                                                                'SiteID'        =>  'XXX-@twitter handle of site',
-                                                                'Title'         =>  'XXX-site name',
-                                                                'URL'           =>  'XXX-full site url',
-                                                            );
+    protected bool      $bPublic                        =   true;
     
-    protected bool      $bTwitter                       =   false;
-    protected ?string   $strTwitterCard                 =   null;
-    protected ?string   $strTwitterCreator              =   null;
-    protected ?string   $strTwitterDesc                 =   null;
-    protected ?string   $strTwitterImage                =   null;
-    protected ?string   $strTwitterImageAlt             =   null;
-    protected ?string   $strTwitterImageType            =   null;
-    protected ?string   $strTwitterSiteID               =   null;
-    protected ?string   $strTwitterTitle                =   null;
-    protected ?string   $strTwitterURL                  =   null;
+    // Site info
+    protected string    $strSiteAbstract;
+    protected string    $strSiteAuthors;
+    protected string    $strSiteContentSecurityPolicy;
+    protected string    $strSiteDescription;
+    protected array     $arrSiteFavicons;
+    protected string    $strSiteGenerator;
+    protected string    $strSiteGoogleTag;
+    protected string    $strSiteKeywords;
+    protected string    $strSiteDesigner;
+    protected string    $strSiteNormaliseCSS;
+    protected string    $strSiteOGDescription;
+    protected string    $strSiteOGImage;
+    protected string    $strSiteOGImageAlt;
+    protected int       $iSiteOGImageHeight;
+    protected string    $strSiteOGImageType;
+    protected int       $iSiteOGImageWidth;
+    protected string    $strSiteOGLocale;
+    protected string    $strSiteOGTitle;
+    protected string    $strSiteOGType;
+    protected string    $strSiteOGURL;
+    protected bool      $bSiteOpenGraph;
+    
+    protected string    $strSiteOwner;
+    protected array     $arrSitePreloadFonts;
+    
+    protected bool      $bSitePWA;
+    protected string    $strSitePWAAppName;
+    protected string    $strSitePWAManifest;
+    protected string    $strSiteRating;
+    protected int       $iSiteSERevisit;
+    protected string    $strSiteThemeColor;
+    
+    protected bool      $bTwitter;
+    protected string    $strTwitterCard;
+    protected string    $strTwitterCreator;
+    protected string    $strTwitterDescription;
+    protected string    $strTwitterImage;
+    protected string    $strTwitterImageAlt;
+    protected string    $strTwitterImageType;
+    protected string    $strTwitterSiteID;
+    protected string    $strTwitterTitle;
+    protected string    $strTwitterURL;
+    
     
     //////////////////////////////////////////////////////////////////////////////
     //
@@ -133,47 +90,70 @@ class Head extends Site
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function __construct()
+    function __construct($strPgTitle = null)
     {
-    
-        parent::__construct();
+        // Only Prod  pages are public
+        if (!Site::isProd())
+            $this->bPublic = false;
         
         // Get base file name without path or extension
         $this->strFileName = rmvFileExt(basename($_SERVER['PHP_SELF']));
         
+        // Set individual page title
+        if (!is_null($strPgTitle))
+            $this->strPgTitle = $strPgTitle;
+        
+        $this->initSiteVariables();
+        
+        parent::__construct();
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  activateOpenGraph()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Turn on/off the OpenGraph variiable
+    //  Turn on/off the OpenGraph variable
+    //
+    //  @param          bool    $bOG        Open Graph on/off
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function activateOpenGraph(bool $bOG = true) : void
     {
-        $this->bOpenGraph= $bOG;
+        $this->bSiteOpenGraph= $bOG;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  activatePWA()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Turn on/off the PWA variiable
+    //  Turn on/off the PWA variable
+    //
+    //  @param          bool    $bOG        PWA on/off
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function activatePWA(bool $bPWA = true) : void
     {
-        $this->bPWA= $bPWA;
+        $this->bSitePWA= $bPWA;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  activateTwitter()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Turn on/off the Twitter variiable
+    //  Turn on/off the Twitter variable
+    //
+    //  @param          bool    $bOG        Twitter on/off
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -184,53 +164,10 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  addCSSFile()
-    //
-    //  Add an additional CSS file to the header
-    //
-    //  $strCSSFile The filename of the CSS file to be added to the array
-    //              of CSS files for the header
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function addCSSFile(string $strCSSFile) : void
-    {
-        if (is_null($this->arrCSSFiles))
-            // Create the array with the CSS file
-            $this->arrCSSFiles = array($strCSSFile);
-        else {
-            if (!in_array($strCSSFile, $this->arrCSSFiles))
-                // Add the CSS file to the end of the array
-                $this->arrCSSFiles[] = $strCSSFile;
-        }
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  addJScriptFile()
-    //
-    //  Add an additional Javascript file to the header
-    //
-    //  $strCSSFile The filename of the Javascript file to be added to the array
-    //              of Javascript files for the header
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function addJscriptFile(string $strJScriptFile) : void
-    {
-        if (is_null($this->arrJScriptFiles))
-            // Create the array with the Javascript file
-            $this->arrJScriptFiles = array($strJScriptFile);
-        else {
-            if (!in_array($strJScriptFile, $this->arrJScriptFiles))
-                // Add the CSS file to the end of the array
-                $this->arrJScriptFiles[] = $strJScriptFile;
-        }
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    // forceSecure()
+    //  forceSecure()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     // Test for, and redirect to, secure version of site if SSL domains
     //
@@ -238,10 +175,11 @@ class Head extends Site
     
     function forceSecure() : void
     {
-        if ((!$this->isSecure()) && ($this->isProd())) {
-            $arrSSLDomains = $this->getSSLDomains();
+        if (Site::isProd()) {
+            $DotEnvSSL = new DotEnv('ssl_domains.list');
+            $arrSSLDomains = $DotEnvSSL->getList();
             foreach ($arrSSLDomains as $strSSLDomain) {
-                if ($this->getServerName() == $strSSLDomain) {
+                if (getenv('SITE_SERVER_NAME') == $strSSLDomain) {
                     header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                     break;
                 }
@@ -251,7 +189,12 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getAbstract()
+    //  getAbstract()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -262,52 +205,93 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getCopy()
+    //  getAuthors()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
+    //
+    //////////////////////////////////////////////////////////////////////////////
+    
+    function getAuthors() : string
+    {
+        return ($this->strPgAuthors ?? $this->strSiteAuthors);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////
+    //
+    //  getCopy()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getCopy() : string
     {
-        return ($this->strPgCopyright ?? parent::SITE_COPYSITE);
+        return ($this->strPgCopyright ?? $this->strCopyright);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getDesc()
+    //  getDescription()
+    //  Version 1.0a (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getDesc() : string
+    function getDescription() : string
     {
-        return($this->strPgDescription ?? $this->strSiteDesc);
+        return($this->strPgDescription ?? $this->strSiteDescription);
         
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getDesigner()
+    //  getDesigner()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getDesigner() : string
     {
-        return($this->strPgDesigner ?? self::SITE_DESIGNER);
+        return($this->strPgDesigner ?? $this->strSiteDesigner);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getGenerator()
+    //  getGenerator()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getGenerator() : string
     {
-        return($this->strPgGenerator ?? self::SITE_GEN);
+        return($this->strPgGenerator ?? $this->strSiteGenerator);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getKeywords()
+    //  getKeywords()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -318,9 +302,12 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getLangCodes()
+    //  getLangCodes()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Get language codes for head
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -331,63 +318,92 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOgDesc()
+    //  getOGDescription()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getOgDesc() : string
+    function getOGDescription() : string
     {
-        return($this->strOgDesc ?? $this->strSiteDesc);
+        return($this->strSiteOGDescription);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOgLocale()
+    //  getOGLocale()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getOgLocale() : string
+    function getOGLocale() : string
     {
-        return($this->strOgLocale ?? $this->arrSiteOGInfo['Locale']);
+        return($this->strOgLocale ?? $this->strSiteOGLocale);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOgTitle()
+    //  getOGTitle()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getOgTitle() : string
+    function getOGTitle() : string
     {
-        return($this->strOgTitle ?? $this->getSiteTitle());
+        return($this->strOgTitle ?? getenv('SITE_TITLE'));
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOgType()
+    //  getOGType()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getOgType() : string
+    function getOGType() : string
     {
-        return($this->strOgType ?? $this->arrSiteOGInfo['Type']);
+        return($this->strOgType ?? $this->strSiteOGType);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOgURL()
+    //  getOGURL()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getOgURL() : string
+    function getOGURL() : string
     {
-        return($this->strOgURL ?? $this->getSiteRoot() . $_SERVER['REQUEST_URI']);
+        return($this->strSiteOGURL ?? getenv('SITE_ROOT') . $_SERVER['REQUEST_URI']);
     }
     
-    
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getOwner()
+    //  getOwner()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -398,100 +414,206 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getPgTitle()
+    //  getPgTitle()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Prepare title for output
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getPgTitle() : string
     {
-        return($this->getSiteTitle() .
+        return(getenv('SITE_TITLE') .
             (is_null($this->strPgTitle) ? '' : ' - ' . $this->strPgTitle));
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getRating()
+    //  getRating()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getRating() : string
     {
-        return($this->strPgRating ?? self::SITE_RATING);
+        return($this->strPgRating ?? $this->strSiteRating);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterCard()
+    //  getTwitterCard()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getTwitterCard() : string
     {
-        return($this->strTwitterCard ?? $this->arrSiteTwitterInfo['Card']);
+        return($this->strTwitterCard);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterCreator()
+    //  getTwitterCreator()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getTwitterCreator() : string
     {
-        return($this->strTwitterCreator ?? $this->arrSiteTwitterInfo['Creator']);
+        return($this->strTwitterCreator);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterDesc()
+    //  getTwitterDescription()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function getTwitterDesc() : string
+    function getTwitterDescription() : string
     {
-        return($this->strTwitterDesc ?? $this->arrSiteTwitterInfo['Desc']);
+        return($this->strTwitterDescription);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterSiteID()
+    //  getTwitterSiteID()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getTwitterSiteID() : string
     {
-        return($this->strTwitterSiteID ?? $this->arrSiteTwitterInfo['SiteID']);
+        return($this->strTwitterSiteID);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterTitle()
+    //  getTwitterTitle()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getTwitterTitle() : string
     {
-        return($this->strTwitterTitle ?? $this->arrSiteTwitterInfo['Title']);
+        return($this->strTwitterTitle);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // getTwitterURL()
+    //  getTwitterURL()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @return         string
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function getTwitterURL() : string
     {
-        return($this->strTwitterURL ?? $this->arrSiteTwitterInfo['URL']);
+        return($this->strTwitterURL);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setAbstract()
+    //  initSiteVariables()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the text for the SEO Abstract
+    //  Initialise the site variables
+    //
+    //////////////////////////////////////////////////////////////////////////////
+    
+    function initSiteVariables() : void
+    {
+        $this->strSiteNormaliseCSS          =   getenv('SITE_NORMALISE_CSS') ?? '';
+        $this->strSiteAuthors               =   getenv('SITE_AUTHORS') ?? '';
+        $this->strSiteContentSecurityPolicy =   getenv('SITE_CONTENT_SECURITY_POLICY') ?? '';
+        $this->strSiteDescription           =   getenv('SITE_DESCRIPTION') ?? '';
+        $this->strSiteGenerator             =   getenv('SITE_GENERATOR') ?? '';
+        $this->strSiteGoogleTag             =   getenv('SITE_GOOGLE_TAG') ?? '';
+        $this->strSiteKeywords              =   getenv('SITE_KEYWORDS ') ?? '';
+        $this->strSiteDesigner              =   getenv('SITE_DESIGNER') ?? '';
+        
+        $this->bSiteOpenGraph               =   isblank(getenv('SITE_OG')) ? false : boolval(getenv('SITE_OG'));
+        $this->strSiteOGDescription         =   getenv('SITE_OG_DESCRIPTION') ?? '';
+        $this->strSiteOGImage               =   getenv('SITE_OG_IMAGE') ?? '';
+        $this->strSiteOGImageAlt            =   getenv('SITE_OG_IMAGE_ALT') ?? '';
+        $this->iSiteOGImageHeight           =   isblank(getenv('SITE_OG_IMAGE_HEIGHT')) ? 0 : intval(getenv('SITE_OG_IMAGE_HEIGHT'));
+        $this->strSiteOGImageType           =   getenv('SITE_OG_IMAGE_TYPE') ?: '';
+        $this->iSiteOGImageWidth            =   isblank(getenv('SITE_OG_IMAGE_WIDTH')) ? 0 : intval(getenv('SITE_OG_IMAGE_WIDTH'));
+        $this->strSiteOGLocale              =   getenv('SITE_OG_LOCALE') ?? '';
+        $this->strSiteOGTitle               =   getenv('SITE_OG_TITLE') ?? '';
+        $this->strSiteOGType                =   getenv('SITE_OG_TYPE') ?? '';
+        $this->strSiteOGURL                 =   getenv('SITE_OG_URL') ?? '';
+        
+        $this->strSiteAbstract              =   getenv('SITE_SITE_ABSTRACT') ?? '';
+        $this->strSiteOwner                 =   getenv('SITE_OWNER') ?? '';
+        
+        $this->bSitePWA                     =   isblank(getenv('SITE_PWA')) ? false : boolval(getenv('SITE_PWA'));
+        $this->strSitePWAAppName            =   getenv('SITE_PWA_APP_NAME') ?? '';
+        $this->strSitePWAManifest           =   getenv('SITE_PWA_MANIFEST') ?? '';
+        
+        $this->strSiteRating                =   getenv('SITE_RATING') ?? '';
+        
+        $this->iSiteSERevisit               =   isblank(getenv('SITE_SE_REVISIT')) ? 1 : intval(getenv('SITE_SE_REVISIT'));
+        $this->strSiteThemeColor            =   getenv('SITE_THEME_COLOR') ?? '';
+        
+        $this->bTwitter                     =   isblank(getenv('SITE_TWITTER')) ? false : boolval(getenv('SITE_TWITTER'));
+        $this->strTwitterCard               =   getenv('SITE_TWITTER_CARD') ?? '';
+        $this->strTwitterCreator            =   getenv('SITE_TWITTER_CREATOR') ?? '';
+        $this->strTwitterDescription        =   getenv('SITE_TWITTER_DESCRIPTION') ?? '';
+        $this->strTwitterImage              =   getenv('SITE_TWITTER_IMAGE') ?? '';
+        $this->strTwitterImageAlt           =   getenv('SITE_TWITTER_IMAGE_ALT') ?? '';
+        $this->strTwitterImageType          =   getenv('SITE_TWITTER_IMAGE_TYPE') ?? '';
+        $this->strTwitterSiteID             =   getenv('SITE_TWITTER_SITE_ID') ?? '';
+        $this->strTwitterTitle              =   getenv('SITE_TWITTER_TITLE') ?? '';
+        $this->strTwitterURL                =   getenv('SITE_TWITTER_URL') ?? '';
+        
+        // Load lists
+        $DotEnvFavicons = new DotEnv('site_favicons.list');
+        $this->arrSiteFavicons = $DotEnvFavicons->getArray();
+        
+        $DotEnvPreloadFonts = new DotEnv('site_preload_fonts.list');
+        $this->arrSitePreloadFonts = $DotEnvPreloadFonts->getArray();
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////
+    //
+    //  setAbstract()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  @param      string      $strAbs     SEO Abstract
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -502,11 +624,15 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtAuthor
+    //  setArtAuthor()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article Author's Name
+    //  Set article author
     //
-    //  $strArtAuthor   Author's name
+    //  @param      string      $strArtAuthor   Article author
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtAuthor(string $strArtAuthor) : void
@@ -516,11 +642,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtExpTime
+    //  setArtExpTime
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article Expiration Time
+    //  Set article expiration date / time
     //
-    //  $strArtExpTime  YYYY-MM-DDTHH:MM:SS+HH:MM
+    //  @param      string      $strArtExpTime  Article expiration datetime
+    //                                          YYYY-MM-DD HH:MM:SS+HH:MM
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtExpTime(string $strArtExpTime) : void
@@ -530,11 +661,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtModTime
+    //  setArtModTime()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article Modification Time
+    //  Set article modification date / time
     //
-    //  $strArtModTime  YYYY-MM-DDTHH:MM:SS+HH:MM
+    //  @param      string      $strArtModTime  Article modification datetime
+    //                                          YYYY-MM-DD HH:MM:SS+HH:MM
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtModTime(string $strArtModTime) : void
@@ -544,11 +680,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtPubTime
+    //  setArtPubTime()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article Publication Time
+    //  Set article publication date / time
     //
-    //  $strArtPubTime  YYYY-MM-DDTHH:MM:SS+HH:MM
+    //  @param      string      $strArtPubTime  Article publication datetime
+    //                                          YYYY-MM-DD HH:MM:SS+HH:MM
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtPubTime(string $strArtPubTime) : void
@@ -558,11 +699,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtSection
+    //  setArtSection()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article section categories
+    //  Set article section categories (comma-separated)
     //
-    //  $strArtSect Article section categories (comma-separated)
+    //  @param      string      $strArSection  Article section categories
+    //                                         (comma-separated list)
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtSection(string $strArtSect) : void
@@ -572,11 +718,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setArtTags
+    //  setArtTags()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the Article keyword tags
+    //  Set article keyword tags (comma-separated)
     //
-    //  $strArtSect Article keyword tags (comma-separated)
+    //  @param      string      $strArtTags Article keyword tags
+    //                                      (comma-separated list)
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setArtTags(string $strArtTags) : void
@@ -586,9 +737,14 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    // setAuthors()
+    //  setAuthors()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    // Set the text for the SEO Authors
+    //  Set article authors
+    //
+    //  @param      string      $strAuthors     Page authors
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -599,25 +755,14 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setCSSFiles()
-    //
-    //  Set the CSS files for the header
-    //
-    //  $CSSFiles   Either a comma-delimited list of CSS file names or
-    //              a pre-declared array of CSS file names
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function setCSSFiles(string $strCSSFiles) : void
-    {
-        $this->arrCSSFiles = explode(',', $strCSSFiles);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
     //  setCopyright()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the text for the SEO Copyright
+    //  Set page / site copyright
+    //
+    //  @param      string      $strCopyright   Copyright
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -628,9 +773,33 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setDescription()
+    //  setCSSFiles()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the text for the SEO Description
+    //  Set additional CSS files to be loaded
+    //
+    //  @param      string      $strCSSFiles    List of CSS files
+    //                                          (comma-separated list)
+    //
+    //////////////////////////////////////////////////////////////////////////////
+    
+    function setCSSFiles(string $strCSSFiles) : void
+    {
+        $this->arrCSSFiles = explode(',', $strCSSFiles);
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////
+    //
+    //  setDescription()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  Set page / site description
+    //
+    //  @param      string      $strDescription     Description
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -642,8 +811,13 @@ class Head extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setDesigner()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the text for the SEO Designer
+    //  Set page / site designer
+    //
+    //  @param      string      $strDesigner        Designer
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -654,9 +828,15 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setExtJSFiles
+    //  setExtJSFiles()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the list of links to external JavaScript links
+    //  Set additional JS files to be loaded
+    //
+    //  @param      string      $strExtJSLinks  List of JavaScript files
+    //                                          (comma-separated list)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -668,8 +848,13 @@ class Head extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setGenerator()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the text for the SEO Generator
+    //  Set page / site generator
+    //
+    //  @param      string      $strGenerator       Generator
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -680,26 +865,34 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setJScriptFiles()
+    //  setJSFiles()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Javascript files for the header
+    //  Set additional JS files to be loaded
     //
-    //  $arrJScriptFiles    Either a comma-delimited list of JavaScript file names
-    //                      or a pre-declared array of JavaScript file names
+    //  @param      string      $strJScriptFiles    List of JavaScript files
+    //                                              (comma-separated list)
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setJScriptFiles(string $strJScriptFiles) : void
+    function setJSFiles(string $strJSFiles) : void
     {
-        $this->arrJScriptFiles = explode(',', $strJScriptFiles);
+        $this->arrJScriptFiles = explode(',', $strJSFiles);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setKeywords()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  $strKeys    One string with comma-separated terms
-    //  Set the text for the SEO keywords
+    //  Set article keyword tags (comma-separated)
+    //
+    //  @param      string      $strKeys    Keywords
+    //                                      (comma-separated list)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -708,7 +901,21 @@ class Head extends Site
         $this->strPgKeywords = $strKeys;
     }
     
-    function setLangCodes(string $strLangCodes) : void
+    //////////////////////////////////////////////////////////////////////////////
+    //
+    //  setLanguageCodes()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  Set the language info for the page
+    //
+    //  @param      string      $strLangCodes   Language codes
+    //  https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang
+    //
+    //////////////////////////////////////////////////////////////////////////////
+    
+    function setLanguageCodes(string $strLangCodes) : void
     {
         $this->strPgLangCodes = $strLangCodes;
     }
@@ -716,129 +923,156 @@ class Head extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setNormaliseCSS()
+    //  Version 1.0 (08/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the CSS normalisation file
+    //  Set the normalise CSS file
+    //
+    //  @param      string      $strNormaliseCSS    Normalise CSS file name
+    //
     //////////////////////////////////////////////////////////////////////////////
     
     function setNormaliseCSS(string $strNormaliseCSS) : void
     {
-        $this->strNormaliseCSS = $strNormaliseCSS;
+        $this->strSiteNormaliseCSS = $strNormaliseCSS;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgDesc
+    //  setOGDescription()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Open Graph description
     //
+    //  @param      string      $strOGDesc  Open Graph description
+    //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgDesc(string $strOgDesc) : void
+    function setOGDescription(string $strOGDesc) : void
     {
         $this->activateOpenGraph();
-        $this->strOgDesc = $strOgDesc;
+        $this->strSiteOGDescription = $strOGDesc;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgImage
+    //  setOGImage()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Open Graph image URL
-    //      Full URL (ie. https://calctva.app/calctvalogo200x600.png)
+    //  Set the Open Graph image attributes
     //
-    //  $bRel = Image URL is relative to current site or not
+    //  @param      string      $strImage       Image file name
+    //  @param      string      $strType        Image file type
+    //  @param      string      $strImageAlt    Image alt information
+    //  @param      bool        $bRel           File path is relative or not
+    //  @param      int         $iWidth         Image width in pixels
+    //  @param      int         $iHeight        Image height in pixels
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgImage(string $strImage, string $strType, ?string $strImageAlt = null, bool $bRel = true, ?int $iWidth = null, ?int $iHeight = null) : void
+    function setOGImage(string $strImage, string $strType, ?string $strImageAlt = null, bool $bRel = true, ?int $iWidth = null, ?int $iHeight = null) : void
     {
         $this->activateOpenGraph();
-        $this->strOgImage       = ($bRel ? $this->getSiteRoot() : '') . $strImage;
-        $this->strOgImageAlt    = $strImageAlt;
-        $this->iOgImageHeight   = $iHeight;
-        $this->strOgImageType   = 'image/' . $strType;
-        $this->iOgImageWidth    = $iWidth;
+        $this->strSiteOGImage       = ($bRel ? getenv('SITE_ROOT') : '') . $strImage;
+        $this->strSiteOGImageAlt    = $strImageAlt;
+        $this->iSiteOGImageHeight   = $iHeight;
+        $this->strSiteOGImageType   = 'image/' . $strType;
+        $this->iSiteOGImageWidth    = $iWidth;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgLocale
+    //  setOGLocale()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Open Graph locale
-    //      See Language codes
+    //
+    //  @param      string      $strOGLocale    Open Graph locale
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgLocale(string $strPgOgLocale) : void
+    function setOGLocale(string $strOGLocale) : void
     {
         $this->activateOpenGraph();
-        $this->strOgLocale = $strPgOgLocale;
+        $this->strSiteOGLocale = $strOGLocale;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgLocales
-    //
-    //  Set the Open Graph alternate locales
-    //      See Language codes
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function setOgLocales(string $strPgOgLocales) : void
-    {
-        $this->activateOpenGraph();
-        $this->arrOgLocales = explode(',', $strPgOgLocales);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  setOgTitle
+    //  setOGTitle()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Open Graph title
     //
+    //  @param      string      $strOGTitle     Open Graph title
+    //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgTitle(string $strOgTitle) : void
+    function setOGTitle(string $strOGTitle) : void
     {
         $this->activateOpenGraph();
-        $this->strOgTitle = $strOgTitle;
+        $this->strSiteOGTitle = $strOGTitle;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgType
+    //  setOGType()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Open Graph type
-    //      website, article, blog
+    //
+    //  @param      string      $strOGType      Open Graph type
+    //                                          website, article, blog
+    //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgType(string $strOgType) : void
+    function setOGType(string $strOGType) : void
     {
         $this->activateOpenGraph();
-        $this->strOgType = $strOgType;
+        $this->strSiteOGType = $strOGType;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOgURL
+    //  setOGURL()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Open Graph URL
-    //      website, article, blog
     //
-    //  $bRel is URL relative to current site or not
+    //  @param      string      $strOGURL   Open Graph URL
+    //  @param      bool        $bRel       URL relative to current site or not
+    //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setOgURL(string $strOgURL, $bRel = true) : void
+    function setOGURL(string $strOGURL, $bRel = true) : void
     {
         $this->activateOpenGraph();
-        $this->strOgURL = ($bRel ? $this->getSiteRoot() : '') . $strOgURL;
+        $this->strSiteOGURL = ($bRel ? getenv('SITE_ROOT') : '') . $strOGURL;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setOwner
+    //  setOwner()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the text for the SEO Owner
+    //  Set the owner for SEO
+    //
+    //  @param      string      $strOwner       Owner
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -850,10 +1084,17 @@ class Head extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setPWA()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set PWA attributes
+    //  Set the Personal Web App (PWA) attributes
+    //
+    //  @param      string      $strPWAManifest     PWA manifest
+    //  @param      string      $strPWAName         PWA name
     //
     //////////////////////////////////////////////////////////////////////////////
+    
     
     function setPWA(string $strPWAManifest, string $strPWAName) : void
     {
@@ -865,43 +1106,58 @@ class Head extends Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setPWAAppName()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  $strAppName     PWA Application Name
+    //  Set the PWA application name
+    //
+    //  @param      string      $strAppName     PWA application name
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function setPWAAppName(string $strAppName) : void
     {
         $this->activatePWA();
-        $this->strPWAAppName = $strAppName;
+        $this->strSitePWAAppName = $strAppName;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setPWAManifest()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  $strManifestFile    Relative path and file name of PWA manifest file
+    //  Set the PWA Manifest
+    //  Relative path and file name of the PWA manifest file
+    //
+    //  @param      string      $strManifestFile    Manifest file name
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function setPWAManifest(string $strManifestFile) : void
     {
         $this->activatePWA();
-        $this->strPWAManifest = $strManifestFile;
+        $this->strSitePWAManifest = $strManifestFile;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setRating
+    //  setRating()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the rating for the page
+    //  Set the SEO rating for the page
     //
-    //  $strPgRating    general
-    //                  mature
-    //                  restricted
-    //                  adult
-    //                  14 years
-    //                  safe for kids
+    //  @param      string      $strPgRating    Page rating:
+    //                                          general
+    //                                          mature
+    //                                          restricted
+    //                                          adult
+    //                                          14 years
+    //                                          safe for kids
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -910,34 +1166,16 @@ class Head extends Site
         $this->strPgRating = $strPgRating;
     }
     
-    function setSiteAbstract(string $strSiteAbstract) : void
-    {
-        $this->strSiteAbstract = $strSiteAbstract;
-    }
-    
-    function setSiteDesc(string $strSiteDesc) : void
-    {
-        $this->strSiteDesc = $strSiteDesc;
-    }
-    
-    function setSiteKeywords(string $strSiteKeywords) : void
-    {
-        $this->strSiteKeywords = $strSiteKeywords;
-    }
-    
-    function setSiteOwner(string $strSiteOwner) : void
-    {
-        $this->strSiteOwner = $strSiteOwner;
-    }
-    
-    function setSiteThemeColor(string $strSiteThemeColor) : void
-    {
-        $this->strSiteThemeColor = $strSiteThemeColor;
-    }
-    
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setTitle()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
+    //
+    //  Set the page title
+    //
+    //  @param      string      $strTitle       Page title
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -948,31 +1186,43 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitter
+    //  setTwitter()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter Info
+    //  Set the Twitter attributes
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strTwitterDesc     Description
+    //  @param      string      $strTwitterCreator  Creator
+    //  @param      string      $strTwitterCard     Card
+    //
+    //  Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function setTwitter(string $strTwitterDesc, ?string $strTwitterCreator = null, ?string $strTwitterCard = null) : void
     {
         $this->activateTwitter();
-        $this->strTwitterDesc       =   $strTwitterDesc;
-        $this->strTwitterCreator    =   $strTwitterCreator  ??  $this->arrSiteTwitterInfo['Creator'];
-        $this->strTwitterCard       =   $strTwitterCard     ??  $this->arrSiteTwitterInfo['Card'];
+        $this->strTwitterDescription    = $strTwitterDesc;
+        $this->strTwitterCreator        = $strTwitterCreator ?? $this->strTwitterCreator;
+        $this->strTwitterCard           = $strTwitterCard ?? $this->strTwitterCard;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterCard
+    //  setTwitterCard()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter Card info
-    //      summary
-    //      summary_large_image
+    //  Set the Twitter card info
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strTwitterCard     Card info
+    //                                              summary
+    //                                              summary_large_image
+    //
+    //  Full URL (i.e. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -984,12 +1234,15 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterCreator
+    //  setTwitterCreator()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter Creator
-    //      @twitterid
+    //  Set the Twitter creator
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strTwitterCreator  Creator
+    //                                              @TwitterID
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -1001,60 +1254,69 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterDesc
+    //  setTwitterDescription()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Twitter description
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strTwitterDescription  Description
+    //
+    //  Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setTwitterDesc(string $strTwitterDesc) : void
+    function setTwitterDescription(string $strTwitterDescription) : void
     {
         $this->activateTwitter();
-        $this->strTwitterDesc = $strTwitterDesc;
+        $this->strTwitterDescription = $strTwitterDescription;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitter Image
+    //  setTwitterImage()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter image info
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strImage       Image file name
+    //  @param      string      $strType        Image file type
+    //                                          GIF, JPEG, PNG, WEBP
+    //  @param      bool        $bRel           Image URL is relative to current site or not
     //
-    //      Summary card image
+    //  Summary card image
     //          Relative URL
     //          Square 1:1 ratio min 144 x 144 px max 4096 x 4096 px
     //          Max 5 MB
     //
-    //      Summary Large Image
+    //  Summary Large Image
     //          Relative URL
     //          Rectangle 2:1 ratio min 300 x 157 px max 4096 x 4096 px
     //          Max 5 MB
-    //
-    //      Image types
-    //          GIF, JPEG, PNG, WEBP
-    //
-    //      $bRel = image URL is relative to current site or not
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function setTwitterImage(string $strImage, string $strType, ?string $strImageAlt = null, bool $bRel = true) : void
     {
         $this->activateTwitter();
-        $this->strTwitterImage       = ($bRel ? $this->getSiteRoot() : '') . $strImage;
+        $this->strTwitterImage       = ($bRel ? getenv('SITE_ROOT') : '') . $strImage;
         $this->strTwitterImageAlt    = $strImageAlt;
         $this->strTwitterImageType   = 'image/' . $strType;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterSiteID
+    //  setTwitterSiteID()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter siteID
-    //      @twitter id of site owner/creator
+    //  Set the Twitter site owner/creator / reference
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
+    //  @param      string      $strTwitterSiteID   @TwitterID
+    //
+    //  Full URL (i.e. https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -1066,11 +1328,16 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterTitle
+    //  setTwitterTitle()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set the Twitter Title
+    //  Set the Twitter title
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-webTitles/cards/overview/markup)
+    //  @param      string      $strTwitterTitle    Twitter title
+    //
+    //  Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-webTitles/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
@@ -1082,64 +1349,76 @@ class Head extends Site
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setTwitterURL
+    //  setTwitterURL()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set the Twitter URL
     //
-    //      Full URL (ie. https://developer.twitter.com/en/docs/twitter-for-webURLs/cards/overview/markup)
+    //  @param      string      $strTwitterURL      Twitter URL
+    //  @param      bool        $bRel               URL is relative to current site or not
     //
-    //  $bRel is URL relative to current site
+    //  Full URL (i.e. https://developer.twitter.com/en/docs/twitter-for-webURLs/cards/overview/markup)
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function setTwitterURL(string $strTwitterURL, $bRel = true) : void
     {
         $this->activateTwitter();
-        $this->strTwitterURL = ($bRel ? $this->getSiteRoot() : '') . $strTwitterURL;
+        $this->strTwitterURL = ($bRel ? getenv('SITE_ROOT') : '') . $strTwitterURL;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  write()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Output site page head
+    //  Output page head
+    //
+    //  @param      bool        $bPublic            Page is published to public or not
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function write() : void
+    function write(?bool $bPublic = null) : void
     {
+        // Set private / public page
+        $bPublic = $bPublic ?? $this->bPublic;
+        
         // Force Secure Site
         $this->forceSecure();
         
         echo('<!DOCTYPE HTML>' . PHP_EOL);
-        echo('<html lang="' . $this->getLangCodes() . '">' . PHP_EOL . PHP_EOL);
+        echo('<html lang="' . $this->getLangCodes() . '">' . PHP_EOP);
         
-        echo('<head>' . PHP_EOL . PHP_EOL);
+        echo('<head>' . PHP_EOP);
         
         echo(t(1) . '<meta charset="UTF-8">' . PHP_EOL);
-        echo(t(1) . '<meta name="title" content="' . $this->getPgTitle() . '">' . PHP_EOL);
-        echo(t(1) . '<meta name="theme-color" content="' . $this->strSiteThemeColor . '" >' . PHP_EOL . PHP_EOL);
+        echo(t(1) . '<meta name="title" content="' . getenv('SITE_TITLE') . '">' . PHP_EOL);
+        echo(t(1) . '<meta name="theme-color" content="' . $this->strSiteThemeColor . '">' . PHP_EOP);
         
         //////////////////////////////////////////////////////////////////////////////
         //  Content Security Policy
         //////////////////////////////////////////////////////////////////////////////
-        if (!isBlank(self::SITE_CONTENT_SECURITY_POLICY)) {
+        if (!isBlank($this->strSiteContentSecurityPolicy)) {
             echo(t(1) . '<!-- Content Security Policy -->' . PHP_EOL);
-            echo(t(1) . '<meta http-equiv="Content-Security-Policy" content="' . self::SITE_CONTENT_SECURITY_POLICY . '">' . PHP_EOL . PHP_EOL);
+            echo(t(1) . '<meta http-equiv="Content-Security-Policy" content="' . $this->strSiteContentSecurityPolicy . '">' . PHP_EOP);
         }
         
         //////////////////////////////////////////////////////////////////////////////
         //  PWA
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->bPWA) {
+        if ($this->bSitePWA) {
             echo(t(1) . '<!-- PWA Settings -->' . PHP_EOL);
-            if (!is_null($this->strPWAManifest)) {
-                echo(t(1) . '<link rel="manifest" href="' . $this->strPWAManifest . '">' . PHP_EOL);
+            if (!isBlank($this->strSitePWAManifest)) {
+                echo(t(1) . '<link rel="manifest" href="' . $this->strSitePWAManifest . '">' . PHP_EOL);
             }
             
-            if (!is_null($this->strPWAAppName)) {
-                echo(t(1) . '<meta name="application-name" content="' . $this->strPWAAppName . '">' . PHP_EOL . PHP_EOL);
+            if (!isBlank($this->strSitePWAAppName)) {
+                echo(t(1) . '<meta name="application-name" content="' . $this->strSitePWAAppName . '">' . PHP_EOP);
             }
         }
         
@@ -1148,149 +1427,132 @@ class Head extends Site
         //////////////////////////////////////////////////////////////////////////////
         
         echo(t(1) . '<!-- Mobile Friendly -->' . PHP_EOL);
-        echo(t(1) . '<meta name="Viewport" content="width=device-width, initial-scale=1.0" >' . PHP_EOL);
-        echo(t(1) . '<meta name="HandheldFriendly" content="true" >' . PHP_EOL);
-        echo(t(1) . '<meta name="MobileOptimized" content="320" >' . PHP_EOL . PHP_EOL);
+        echo(t(1) . '<meta name="Viewport" content="width=device-width, initial-scale=1.0">' . PHP_EOL);
+        echo(t(1) . '<meta name="HandheldFriendly" content="true">' . PHP_EOL);
+        echo(t(1) . '<meta name="MobileOptimized" content="320">' . PHP_EOP);
         
         //////////////////////////////////////////////////////////////////////////////
         //  META NAMES
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->isProd()) {
+        if ($bPublic) {
             echo(t(1) . '<!-- Site / Page info -->' . PHP_EOL);
             echo(t(1) . '<meta name="abstract" content="' .
-                $this->getAbstract() . '" >' . PHP_EOL);
+                $this->getAbstract() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="copyright" content="Copyright @ ' .
-                $this->getCopy() . '" >' . PHP_EOL);
+                $this->getCopy() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="description" content="' .
-                $this->getDesc() . '" >' . PHP_EOL);
+                $this->getDescription() . '">' . PHP_EOL);
+            echo(t(1) . '<meta name="author" content="' .
+                $this->getAuthors() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="designer" content="' .
-                $this->getDesigner() . '" >' . PHP_EOL);
+                $this->getDesigner() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="generator" content="' .
-                $this->getGenerator() . '" >' . PHP_EOL);
+                $this->getGenerator() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="keywords" content="' .
-                $this->getKeywords() . '" >' . PHP_EOL);
+                $this->getKeywords() . '">' . PHP_EOL);
             echo(t(1) . '<meta name="owner" content="' .
-                $this->getOwner() . '" >' . PHP_EOL . PHP_EOL);
+                $this->getOwner() . '">' . PHP_EOP);
         }
         
         //////////////////////////////////////////////////////////////////////////////
         //  SEO
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->isProd()) {
+        if ($bPublic) {
             echo(t(1) . '<meta name="rating" content="' .
-                $this->getRating() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta name="resource-type" content="document" >' . PHP_EOL);
-            echo(t(1) . '<meta name="distribution" content="global" >' . PHP_EOL);
-            if ((parent::B_PUBLISHED) && $this->isProd())
-                echo(t(1) . '<meta name="robots" content="all, index, follow" >' . PHP_EOL);
+                $this->getRating() . '">' . PHP_EOL);
+            echo(t(1) . '<meta name="resource-type" content="document">' . PHP_EOL);
+            echo(t(1) . '<meta name="distribution" content="global">' . PHP_EOL);
+            if (($this->bPublished) && Site::isProd())
+                echo(t(1) . '<meta name="robots" content="all, index, follow">' . PHP_EOL);
         }
         else {
-            echo(t(1) . '<meta name="robots" content="none" >' . PHP_EOL);
+            echo(t(1) . '<meta name="robots" content="none">' . PHP_EOL);
             echo(t(1) . '<meta name="googlebot" content="none">' . PHP_EOL);
             echo(t(1) . '<meta name="Ads-bot-Google" content="noindex">' . PHP_EOL);
         }
+        echo(PHP_EOL);
         
         //////////////////////////////////////////////////////////////////////////////
         //  OPEN GRAPH / FACEBOOK
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->bOpenGraph) {
+        if ($this->bSiteOpenGraph && $bPublic) {
             echo(t(1) . '<!-- Open Graph / Facebook -->' . PHP_EOL);
-            if (is_null($this->strOgImage)) {
-                $strOgImage     = $this->arrSiteOGInfo['Image'];
-                $strOgImageAlt  = $this->arrSiteOGInfo['ImageAlt'];
-                $iOgImageH      = $this->arrSiteOGInfo['ImageHeight'];
-                $iOgImageW      = $this->arrSiteOGInfo['ImageWidth'];
-                $strOgImageType = $this->arrSiteOGInfo['ImageType'];
+            if (isBlank($this->strSiteOGImage)) {
+                $strOGImage     = $this->strSiteOGImage;
+                $strOGImageAlt  = $this->strSiteOGImageAlt;
+                $iOGImageH      = $this->iSiteOGImageHeight;
+                $iOGImageW      = $this->iSiteOGImageWidth;
+                $strOGImageType = $this->strSiteOGImageType;
             }
             else {
-                $strOgImage     = $this->strOgImage;
-                $strOgImageAlt  = $this->strOgImageAlt;
-                $iOgImageH      = $this->iOgImageHeight ?? null;
-                $iOgImageW      = $this->iOgImageWidth ?? null;
-                $strOgImageType = $this->strOgImageType;
+                $strOGImage     = $this->strSiteOGImage;
+                $strOGImageAlt  = $this->strSiteOGImageAlt;
+                $iOGImageH      = $this->iSiteOGImageHeight;
+                $iOGImageW      = $this->iSiteOGImageWidth;
+                $strOGImageType = $this->strSiteOGImageType;
             }
             
-            echo(t(1) . '<meta property="og:site_name" content="' . $this->getSiteTitle() . '" >' . PHP_EOL);
-            if (!isBlank($this->getOgTitle()))
-                echo(t(1) . '<meta property=”og:title” content=”' . $this->getOgTitle() . '” >' . PHP_EOL);
-            if (!isBlank($this->getOgDesc()))
-                echo(t(1) . '<meta property=”og:description” content=”' . $this->getOgDesc() . '” >' . PHP_EOL);
-            if (!isBlank($this->getOgType()))
-                echo(t(1) . '<meta property=”og:type” content=”' . $this->getOgType() . '” >' . PHP_EOL);
-            if (!isBlank($this->getOgURL()))
-                echo(t(1) . '<meta property=”og:url” content=”' . $this->getOgURL() . $_SERVER['REQUEST_URI'] . '" >' . PHP_EOP);
+            echo(t(1) . '<meta property="og:site_name" content="' . getenv('SITE_TITLE') . '">' . PHP_EOL);
+            if (!isBlank($this->getOGTitle()))
+                echo(t(1) . '<meta property=”og:title” content=”' . $this->getOGTitle() . '”>' . PHP_EOL);
+            if (!isBlank($this->getOGDescription()))
+                echo(t(1) . '<meta property=”og:description” content=”' . $this->getOGDescription() . '”>' . PHP_EOL);
+            if (!isBlank($this->getOGType()))
+                echo(t(1) . '<meta property=”og:type” content=”' . $this->getOGType() . '”>' . PHP_EOL);
+            if (!isBlank($this->getOGURL()))
+                echo(t(1) . '<meta property=”og:url” content=”' . $this->getOGURL() . $_SERVER['REQUEST_URI'] . '">' . PHP_EOP);
             
-            echo(t(1) . '<meta property="og:image" content="' . $strOgImage . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="og:image:alt" content="' . $strOgImageAlt . '" >' . PHP_EOL);
-            if (!is_null($this->iOgImageHeight))
-                echo(t(1) . '<meta property="og:image:height" content="' . $iOgImageH . '" >' . PHP_EOL);
-            if ($this->isSecure()) {
+            echo(t(1) . '<meta property="og:image" content="' . $strOGImage . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="og:image:alt" content="' . $strOGImageAlt . '">' . PHP_EOL);
+            if ($this->iSiteOGImageHeight > 0)
+                echo(t(1) . '<meta property="og:image:height" content="' . $iOGImageH . '">' . PHP_EOL);
+            if ($this->bSecure) {
                 echo(t(1) . '<meta property=”og:image:secure_url” content=”' .
-                    str_replace('http:', 'https:', $strOgImage) . '" >' . PHP_EOL);
+                    str_replace('http:', 'https:', $strOGImage) . '">' . PHP_EOL);
             }
-            echo(t(1) . '<meta property="og:image:type" content="' . $strOgImageType . '" >' . PHP_EOL);
-            if (!is_null($this->iOgImageWidth))
-                echo(t(1) . '<meta property="og:image:width" content="' . $iOgImageW . '" >' . PHP_EOL);
+            echo(t(1) . '<meta property="og:image:type" content="' . $strOGImageType . '">' . PHP_EOL);
+            if ($this->iSiteOGImageWidth > 0)
+                echo(t(1) . '<meta property="og:image:width" content="' . $iOGImageW . '">' . PHP_EOL);
             
-            echo(t(1) . '<meta property="og:locale" content="' . $this->getOGLocale() . '" >' . PHP_EOL);
-            if (is_null($this->arrOgLocales)) {
-                foreach ($this->arrSiteOGLocales as $strLocale) {
-                    echo(t(1) . '<meta property="og:locale:alternate" content="' . $strLocale . '" >' . PHP_EOL);
-                }
-            }
-            else {
-                foreach ($this->arrOgLocales as $strLocale) {
-                    echo(t(1) . '<meta property="og:locale:alternate" content="' . $strLocale . '" >' . PHP_EOL);
-                }
-            }
-            echo(PHP_EOL);
+            echo(t(1) . '<meta property="og:locale" content="' . $this->getOGLocale() . '">' . PHP_EOP);
         }
         
         //////////////////////////////////////////////////////////////////////////////
         //  TWITTER
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->bTwitter) {
+        if ($this->bTwitter && $bPublic) {
             echo(t(1) . '<!-- Twitter -->' . PHP_EOL);
-            if (is_null($this->strTwitterImage)) {
-                $strTwitterImage        =   $this->arrSiteTwitterInfo['Image'];
-                $strTwitterImageAlt     =   $this->arrSiteTwitterInfo['ImageAlt'];
-                $strTwitterImageType    =   $this->arrSiteTwitterInfo['ImageType'];
-            }
-            else {
-                $strTwitterImage        =   $this->strTwitterImage;
-                $strTwitterImageAlt     =   $this->strTwitterImageAlt;
-                $strTwitterImageType    =   $this->strTwitterImageType;
-            }
+            echo(t(1) . '<meta property="twitter:card" content="' . $this->getTwitterCard() . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:creator" content="' . $this->getTwitterCreator() . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:description" content="' . $this->getTwitterDescription() . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:site" content="' . $this->getTwitterSiteID() . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:title" content="' . $this->getTwitterTitle() . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:url" content="' . $this->getTwitterURL() . '">' . PHP_EOP);
             
-            echo(t(1) . '<meta property="twitter:card" content="' . $this->getTwitterCard() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:creator" content="' . $this->getTwitterCreator() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:description" content="' . $this->getTwitterDesc() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:site" content="' . $this->getTwitterSiteID() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:title" content="' . $this->getTwitterTitle() . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:url" content="' . $this->getTwitterURL() . '" >' . PHP_EOP);
-            
-            echo(t(1) . '<meta property="twitter:image" content="' . $strTwitterImage . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:image:alt" content="' . $strTwitterImageAlt . '" >' . PHP_EOL);
-            echo(t(1) . '<meta property="twitter:image:type" content="' . $strTwitterImageType . '" >' . PHP_EOP);
+            echo(t(1) . '<meta property="twitter:image" content="' . $this->strTwitterImage . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:image:alt" content="' . $this->strTwitterImageAlt . '">' . PHP_EOL);
+            echo(t(1) . '<meta property="twitter:image:type" content="' . $this->strTwitterImageType . '">' . PHP_EOP);
         }
         
         //////////////////////////////////////////////////////////////////////////////
         //  FAVICONS
         //////////////////////////////////////////////////////////////////////////////
         
-        echo(t(1) . '<!-- Favicons -->' . PHP_EOL);
-        foreach ($this->arrFavIcons as $strSize => $strFile) {
-            echo(t(1) . '<link rel="icon" type="image/png" sizes="' . $strSize . '" href="' . $strFile . '" >' . PHP_EOL);
+        if (!empty($this->arrSiteFavicons) && $bPublic) {
+            echo(t(1) . '<!-- Favicons -->' . PHP_EOL);
+            foreach ($this->arrSiteFavicons as $strSize => $strFile) {
+                echo(t(1) . '<link rel="icon" type="image/png" sizes="' . $strSize . '" href="' . $strFile . '">' . PHP_EOL);
+            }
+            if (file_exists(getenv('SITE_PATH') . '/apple-touch-icon.png'))
+                echo(t(1) . '<link rel="apple-touch-icon" href="/apple-touch-icon.png">' . PHP_EOL);
+            if (file_exists(getenv('SITE_PATH') . '/favicon.ico'))
+                echo(t(1) . '<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">' . PHP_EOL);
+            echo(PHP_EOL);
         }
-        if (file_exists($this->getPath() . '/apple-touch-icon.png'))
-            echo(t(1) . '<link rel="apple-touch-icon" href="/apple-touch-icon.png">' . PHP_EOL);
-        if (file_exists($this->getPath() . '/favicon.ico'))
-            echo(t(1) . '<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" >' . PHP_EOP);
-        echo(PHP_EOL);
         
         //////////////////////////////////////////////////////////////////////////////
         //  ARTICLE INFO
@@ -1313,12 +1575,11 @@ class Head extends Site
         //  PRELOAD FONTS
         //////////////////////////////////////////////////////////////////////////////
         
-        if (!is_null(self::SITE_ARR_PRELOAD_FONTS)) {
+        if (!empty($this->arrSitePreloadFonts)) {
             echo(t(1) . '<!-- Fonts -->' . PHP_EOL);
-            foreach (self::SITE_ARR_PRELOAD_FONTS as $strFile => $strType) {
-                echo(t(1) . '<link rel="preload" href="' . self::FONTS_DIR . $strFile . '" as="font" type="font/' . $strType . '" crossorigin>' . PHP_EOL);
+            foreach ($this->arrSitePreloadFonts as $strFile => $strType) {
+                echo(t(1) . '<link rel="preload" href="' . $this->strFontsDir . $strFile . '" as="font" type="font/' . $strType . '" crossorigin>' . PHP_EOL);
             }
-            echo(PHP_EOL);
         }
         
         //////////////////////////////////////////////////////////////////////////////
@@ -1326,22 +1587,22 @@ class Head extends Site
         //////////////////////////////////////////////////////////////////////////////
         
         // Global Javascript file
-        $strJS = $this->getPath() . parent::JS_DIR . parent::FILE_BASE . '.js';
+        $strJS = getenv('SITE_PATH') . getenv('SITE_JSS_DIR') . getenv('SITE_FILE_BASE') . '.js';
         if (file_exists($strJS)) {
-            echo(t(1) . '<script defer src="' . parent::JS_DIR . parent::FILE_BASE . '.js"></script>' . PHP_EOL);
+            echo(t(1) . '<script defer src="' . getenv('SITE_JSS_DIR') . getenv('SITE_FILE_BASE') . '.js"></script>' . PHP_EOL);
         }
         
         // If internal Javascript file exists with same file name include it
-        $strJS = $this->getPath() . parent::JS_DIR . $this->strFileName . '.js';
+        $strJS = getenv('SITE_PATH') . getenv('SITE_JSS_DIR') . $this->strFileName . '.js';
         if (file_exists($strJS)) {
-            echo(t(1) . '<script defer src="' . parent::JS_DIR . $this->strFileName . '.js"></script>' . PHP_EOL);
+            echo(t(1) . '<script defer src="' . getenv('SITE_JSS_DIR') . $this->strFileName . '.js"></script>' . PHP_EOL);
         }
         
         // Additional Javascript files
         if (!is_null($this->arrJScriptFiles)) {
             foreach($this->arrJScriptFiles as $strJScriptFile) {
-                $strJS = parent::JS_DIR . $strJScriptFile;
-                if (file_exists($this->getPath() . $strJS))
+                $strJS = getenv('SITE_JSS_DIR') . $strJScriptFile;
+                if (file_exists(getenv('SITE_PATH') . $strJS))
                     echo(t(1) . '<script src="' . $strJS . '"></script>'. PHP_EOL);
             }
         }
@@ -1359,21 +1620,21 @@ class Head extends Site
         
         // Global stylesheets
         echo(PHP_EOL);
-        echo(t(1) . '<link rel="stylesheet" href="' . parent::CSS_DIR . $this->strNormaliseCSS . '?v=' . parent::VER_NUM . '" >' . PHP_EOL);
-        if (file_exists($this->getPath() . parent::CSS_DIR . parent::FILE_BASE . '.css'))
-            echo(t(1) . '<link rel="stylesheet" href="' . parent::CSS_DIR . parent::FILE_BASE . '.css?v=' . parent::VER_NUM . '" >' . PHP_EOL);
+        echo(t(1) . '<link rel="stylesheet" href="' . getenv('SITE_CSS_DIR') . $this->strSiteNormaliseCSS . '?v=' . getenv('SITE_VER_NUM') . '">' . PHP_EOL);
+        echo(t(1) . '<link rel="stylesheet" href="' . getenv('SITE_CSS_DIR') . getenv('SITE_FILE_BASE') . '.css?v=' . getenv('SITE_VER_NUM') . '">' . PHP_EOL);
         
         // If stylesheet exists with same file name include it
-        if (file_exists($this->getPath() . parent::CSS_DIR . $this->strFileName . '.css')) {
-            echo(t(1) . '<link rel="stylesheet" href="' . parent::CSS_DIR . $this->strFileName . '.css?v=' . parent::VER_NUM . '" >' . PHP_EOL);
+        $strCSSFile = getenv('SITE_PATH') . getenv('SITE_CSS_DIR') . $this->strFileName . '.css';
+        if (file_exists($strCSSFile)) {
+            echo(t(1) . '<link rel="stylesheet" href="' . getenv('SITE_CSS_DIR') . $this->strFileName . '.css?v=' . getenv('SITE_VER_NUM') . '">' . PHP_EOL);
         }
         
         // Additional external stylesheets
         if (!is_null($this->arrCSSFiles)) {
             foreach($this->arrCSSFiles as $css_scriptfile) {
-                $strCSSFile = parent::CSS_DIR . $css_scriptfile;
-                if (file_exists($this->getPath() . $strCSSFile))
-                    echo(t(1) . '<link rel="stylesheet" href="' . $strCSSFile . '?v=' . parent::VER_NUM . '" >'. PHP_EOL);
+                $strCSSFile = getenv('SITE_CSS_DIR') . $css_scriptfile;
+                if (file_exists(getenv('SITE_PATH') . $strCSSFile))
+                    echo(t(1) . '<link rel="stylesheet" href="' . $strCSSFile . '?v=' . getenv('SITE_VER_NUM') . '">'. PHP_EOL);
             }
         }
         
@@ -1381,7 +1642,8 @@ class Head extends Site
         //  GOOGLE ANALYTICS
         //////////////////////////////////////////////////////////////////////////////
         
-        if ($this->isProd() && (!is_null($this->strSiteGoogleTag))) {
+        if ($bPublic && (!isBlank($this->strSiteGoogleTag)) ) {
+            echo(PHP_EOL);
             echo(t(1) . '<!-- ---------------------------------------------------------------' . PHP_EOL);
             echo(t(1) . '-    GOOGLE ANALYTICS' . PHP_EOL);
             echo(t(1) . '---------------------------------------------------------------- -->' . PHP_EOL);
@@ -1395,6 +1657,7 @@ class Head extends Site
         }
         
         // Page title
+        echo(PHP_EOL);
         echo(t(1) . '<title>' . $this->getPgTitle() . '</title>' . PHP_EOL);
         
         echo("</head>" . PHP_EOP);
@@ -1402,4 +1665,3 @@ class Head extends Site
         echo("<body>" . PHP_EOP);
     }
 }
-

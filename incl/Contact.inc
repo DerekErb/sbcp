@@ -20,7 +20,7 @@ class Contact
 //            echo(t(2) . '</div>' . PHP_EOL);
             echo(t(2) . '<div>' . PHP_EOL);
                 $strContact = ($strLang === 'fr') ? 'Contactez Nous'            : 'Contact Us';
-                $strEmail   = ($strLang === 'fr') ? 'clubdelecture@gmail.com'   : 'silentbookclub@gmail.com';
+                $strEmail   = ($strLang === 'fr') ? 'silentbookclubparis@gmail.com'   : 'silentbookclub@gmail.com';
                 echo(t(3) . '<a href="mailto:' . $strEmail . '">' . $strContact . '</a>' . PHP_EOL);
             echo(t(2) . '</div>' . PHP_EOL);
         echo(t(1) . '</section>' . PHP_EOP);

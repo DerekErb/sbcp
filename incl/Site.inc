@@ -1,199 +1,61 @@
 <?php
 
+// Load environment variables
+if (!getenv('SITE_VER_NUM')) {
+    $DotEnv = new DotEnv('site.env');
+    $DotEnv->load();
+}
+
+//  TODO Check for variables and constants now in Intl class ...
+
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Site
-//  @version    42.0.6 (15/05/2024)
-//  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
+//  @version    43.2 (09/03/2025)
+//  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
 /////////////////////////////////////////////////////////////////////////////
 
 class Site
 {
-    public const            VER_NUM             =   '0.2.2';
-    public const            CSS_DIR             =   '/css/';
-    public const            CSV_EXP_DIR         =   '/impexp/';
-    public const            CSV_IMP_DIR         =   '/impexp/';
-    public const            FILE_BASE           =   'sbc';
-    public const            FONTS_DIR           =   '/fonts/';
-    public const            IMGS_DIR            =   '/imgs/';
-    public const            JS_DIR              =   '/js/';
-    
+    public readonly string      $strCopyright;
+    public readonly string      $strCopyrightSite;
+    public readonly string      $strCSSDir;
+    public readonly string      $strCSSExpDir;
+    public readonly string      $strCSSImpDir;
+    public readonly int         $iDefCookieDuration;
+    public readonly string      $strDefLang;
+    public readonly int         $iDefUserID;
+    public readonly string      $strFileBase;
+    public readonly string      $strFontsDir;
+    public readonly string      $strHttp;
+    public readonly string      $strImagesDir;
     // dbTable uses the ImpExp tables
-    public const            IMPEXP              =   true;
-    
+    public readonly bool        $bImpExp;
+    public readonly string      $strJSDir;
     // Live site published for SE indexing
-    public const            B_PUBLISHED         =   false;
+    public readonly bool        $bPublished;
+    public readonly bool        $bSecure;
+    public readonly string      $strServerName;
+    public readonly string      $strVerNum;
     
-    protected static bool   $bSecure            =   false;
-    
-    public static ?string   $strHttp            =   null;
-    public static ?string   $strServerName      =   null;
-    public static ?string   $strPath            =   null;
-    public static ?string   $strRoot            =   null;
-    public static ?string   $strSubTit          =   null;
-    public static ?string   $strTitle           =   'Silent Book Club';
-    
-    private const           ARR_COOKIES         =   array(
-                                                        'cookies',
-                                                    );
-    
-    //////////////////////////////////////////////////////////
-    //
-    // SITE DEFAULTS
-    //
-    //////////////////////////////////////////////////////////
-    
-    public const            DEF_COOKIE_DURATION =   8;  // days
-    public const            DEF_LANG            =   'en';
-    public const            DEF_FMTDT           =   'wd';
-    public const            DEF_TZONE           =   'Europe/Paris';
-    public const            DEF_USERID          =   1;
-    protected const         SITE_COPY           =   'Derek Erb Solutions';
-    protected const         SITE_COPYSITE       =   'https://derekerb.solutions';
-    
-    //////////////////////////////////////////////////////////
-    //
-    // DEV / STAGE / PROD
-    //
-    //////////////////////////////////////////////////////////
-    
-    protected static bool   $bDev               =   false;
-    protected static bool   $bStage             =   false;
-    protected static bool   $bProd              =   false;
-    protected static bool   $bLocal             =   false;
-    
-    private const           ARR_DEV_SITES       =   array(
-                                                        'silentbookclubparis.local',
-                                                        'silentbookclubparisfr.local',
-                                                        'englishsilentbookclubparis.local',
-                                                        'englishsilentbookclubparisfr.local',
-                                                        'clubdelecturesilencieuseparis.local',
-                                                        'clubdelecturesilencieusefr.local',
-                                                    );
-    private const           ARR_STAGE_SITES     =   array(
-                                                        'xxx-prod',
-                                                        'des-dev.xxx',
-                                                    );
-    
-    private const           ARR_PROD_SITES      =   array(
-                                                        'silentbookclub.paris',
-                                                        'silentbookclubparis.fr',
-                                                        'englishsilentbookclub.paris',
-                                                        'englishsilentbookclub.fr',
-                                                        'clubdelecturesilencieuse.paris',
-                                                        'clubdelecteuresilencieuse.fr',
-                                                    );
-
-    private const           ARR_LOCAL_SITES     =   array(
-                                                        'localhost',
-                                                        'silentbookclubparis.local',
-                                                        'silentbookclubparisfr.local',
-                                                        'englishsilentbookclubparis.local',
-                                                        'englishsilentbookclubparisfr.local',
-                                                        'clubdelecturesilencieuseparis.local',
-                                                        'clubdelecturesilencieusefr.local',
-                                                    );
-    private const           ARR_SSL_DOMAINS =       array(
-                                                        'silentbookclubparis.local',
-                                                        'silentbookclubparisfr.local',
-                                                        'englishsilentbookclubparis.local',
-                                                        'englishsilentbookclubparisfr.local',
-                                                        'clubdelecturesilencieuseparis.local',
-                                                        'clubdelecturesilencieusefr.local',
-                                                        'silentbookclub.paris',
-                                                        'silentbookclubparis.fr',
-                                                        'englishsilentbookclub.paris',
-                                                        'englishsilentbookclub.fr',
-                                                        'clubdelecturesilencieuse.paris',
-                                                        'clubdelecteuresilencieuse.fr',
-                                                    );
-    
-    //////////////////////////////////////////////////////////
-    //
-    // DATABASES
-    //
-    //////////////////////////////////////////////////////////
-    
-    private const               ARR_DB_LOCAL        =   array(
-        'HOST'      =>  'localhost',
-        'USER'      =>  'dbsys',
-        'PASS'      =>  'XXX-PASS',
-    );
-    private const               ARR_DB_STAGE        =   array(
-        'HOST'      =>  'XXX-IP-ADDRESS',
-        'USER'      =>  'XXX-USER',
-        'PASS'      =>  'XXX-PASS',
-        'DBNAME'    =>  'XXX-DBNAME',
-    );
-    private const               ARR_DB_PROD         =   array(
-        'HOST'      =>  'XXX-IP-ADDRESS',
-        'USER'      =>  'XXX-USER',
-        'PASS'      =>  'XXX-PASS',
-        'DBNAME'    =>  'XXX-DBNAME',
-    );
-    
-    private const               DB_LOCAL_DEV        =   'XXX-DBNAME';
-    private const               DB_LOCAL_STAGE      =   'XXX-DBNAME';
-    private const               DB_LOCAL_PROD       =   'XXX-DBNAME';
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  __construct()
-    //  Version 1.0 (17/05/2023)
+    //  Version 1.1 (06/03/2025)
     //
     //////////////////////////////////////////////////////////////////////////////
     
     function __construct()
     {
-        // Set Absolute Path
-        self::$strPath = $_SERVER['DOCUMENT_ROOT'];
-        
-        // Site root
-        self::$strRoot = self::$strHttp . '://' . $_SERVER['HTTP_HOST'];
-        
-        // Check for secure
-        if (isset($_SERVER['HTTPS'])) {
-            if (!empty($_SERVER['HTTPS'] && $_SERVER['HTTPS'] !== 'off')) {
-                self::$bSecure = true;
-            }
-        }
-        
-        // Get protocol (http or https)
-        self::$strHttp = (self::isSecure() ? 'https' : 'http');
-        
-        // Set Server Name
-        $this->setServerName();
+        $this->setReadOnlyVariables();
         
         // Set site language
-        $this->setLang();
+        $this->setLang($this->getSiteLang());
         
-        // Test for dev / stage / prod
-        foreach (self::ARR_DEV_SITES as $strSite) {
-            if ($strSite == self::$strServerName) {
-                self::$bDev = true;
-                break;
-            }
-        }
-        foreach (self::ARR_STAGE_SITES as $strSite) {
-            if ($strSite == self::$strServerName) {
-                self::$bStage = true;
-                break;
-            }
-        }
-        foreach (self::ARR_PROD_SITES as $strSite) {
-            if ($strSite == self::$strServerName) {
-                self::$bProd = true;
-                break;
-            }
-        }
-        foreach (self::ARR_LOCAL_SITES as $strSite) {
-            if ($strSite == self::$strServerName) {
-                self::$bLocal = true;
-                break;
-            }
-        }
+        $this->getSiteState();
         
         // Error reporting
         error_reporting(self::isProd() ? E_ERROR : E_ALL);
@@ -202,13 +64,11 @@ class Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  clearAllCookies()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  Version 1.1 (06/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Clear all of the site cookies
-    //
-    //  @param          none
     //
     //  @return         void
     //
@@ -216,7 +76,9 @@ class Site
     
     function clearAllCookies() : void
     {
-        foreach(self::ARR_COOKIES as $strCookie) {
+        $DotEnvCookies = new DotEnv('cookies.list');
+        $arrCookies = $DotEnvCookies->getList();
+        foreach($arrCookies as $strCookie) {
             delCookie($strCookie);
         }
     }
@@ -224,8 +86,8 @@ class Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  getDB()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  Version 2.0 (06/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Establish database connection according to server
@@ -238,41 +100,36 @@ class Site
     public static function getDB() : object
     {
         if (self::isStage()) {
-            $strHost        = self::ARR_DB_STAGE['HOST'];
-            $strUser        = self::ARR_DB_STAGE['USER'];
-            $strPass        = self::ARR_DB_STAGE['PASS'];
-            $strDBName      = self::ARR_DB_STAGE['DBNAME'];
+            $strList = 'db_stage.list';
         }
         elseif (self::isLocal()) {
-            $strHost        = self::ARR_DB_LOCAL['HOST'];
-            $strUser        = self::ARR_DB_LOCAL['USER'];
-            $strPass        = self::ARR_DB_LOCAL['PASS'];
-            if (self::isProd()) {
-                $strDBName = self::DB_LOCAL_PROD;
-            }
-            elseif (self::isStage()) {
-                $strDBName = self::DB_LOCAL_STAGE;
-            }
-            else {
-                $strDBName = self::DB_LOCAL_DEV;
-            }
+            $strList = 'db_local.list';
         }
         else {
-            $strHost        = self::ARR_DB_PROD['HOST'];
-            $strUser        = self::ARR_DB_PROD['USER'];
-            $strPass        = self::ARR_DB_PROD['PASS'];
-            $strDBName      = self::ARR_DB_PROD['DBNAME'];
+            $strList = 'db_prod.list';
+        }
+        
+        $DotEnvDB = new DotEnv($strList);
+        $arrDB = $DotEnvDB->getArray();
+        $strDBName = 'DBNAME';
+        if (self::isLocal()) {
+            if (self::isDev())
+                $strDBName = 'DBNAME_DEV';
+            elseif (self::isStage())
+                $strDBName = 'DBNAME_STAGE';
+            else
+                $strDBName = 'DBNAME_PROD';
         }
         
         // Create data source connection string
-        $strConn = 'mysql:host=' . $strHost . ';dbname=' . $strDBName . ';charset=utf8';
+        $strConn = 'mysql:host=' . $arrDB['HOST'] . ';dbname=' . $arrDB[$strDBName] . ';charset=utf8';
         
         // DEBUG
         // 	echo($StrConn . '<br/>');
         
         // Connect to database
         try {
-            $db = new PDO($strConn, $strUser, $strPass);
+            $db = new PDO($strConn, $arrDB['USER'], $arrDB['PASS']);
         }
         catch(Exception $error) {
             die('Connection failed: ' . $error->getMessage());
@@ -284,11 +141,11 @@ class Site
     //////////////////////////////////////////////////////////////////////////////
     //
     //  getLang()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  Version 1.3 (07/03/2025)
+    //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Get Site language from cookie or default
+    //  Get Site language from URL, cookie or default
     //
     //  @return         string
     //
@@ -296,140 +153,101 @@ class Site
     
     public static function getLang() : string
     {
+        // Return the language from the URL
+        if (isset($_GET['lang']))
+            return(strtolower($_GET['lang']));
+        
         // Return the language from the cookie
-        return($_COOKIE['lang'] ?? self::DEF_LANG);
+        return($_COOKIE['lang'] ?? getenv('SITE_DEF_LANG'));
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  getPath()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  getSiteLang()
+    //  Version 1.0 (09/03/2025)
+    //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Get Site path
+    //  Get language from language sites list of server names
+    //  sites_lang_xx.list
     //
-    //  @return         string
+    //  @return         string      2-letter language code
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    public static function getPath() : string
+    function getSiteLang() : ?string
     {
-        return(self::$strPath);
+        // Find each file sites_lang_xx.list
+        foreach(glob(getenv('SITE_PATH') . '/env/' . 'sites_lang_*.list') as $strFileName) {
+            $DotEnvList = new DotEnv(getFileName($strFileName));
+            $arrList = $DotEnvList->getList();
+            foreach($arrList as $strServer) {
+                // Find server name in list file
+                if ($strServer === $this->strServerName) {
+                    // Lang code = 2 letters after sites_lang_ in filename
+                    return(strMid(getFileName($strFileName), 11, 2));
+                }
+            }
+        }
+        
+        return null;
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  getServerName()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  getSiteState()
+    //  Version 1.0 (06/03/2025)
+    //  @copyright  2025 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Get Site server name
-    //
-    //  @return         string
+    //  Set the local / dev / stage / prod site states
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    public static function getServerName() : string
+    function getSiteState() : void
     {
-        return(self::$strServerName);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  getSiteRoot()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Get Site root directory
-    //
-    //  @return         string
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function getSiteRoot() : string
-    {
-        return(self::$strRoot);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  getSiteTitle()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Get Site title
-    //
-    //  @return         string
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function getSiteTitle() : string
-    {
-        return(self::$strTitle);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  getSiteSubTit()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Get Site subtitle
-    //
-    //  @return         string
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function getSiteSubTit() : string
-    {
-        return(self::$strSubTit);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  getSSLDomains()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Get the domain addresses with SSL certificates
-    //
-    //  @return         array
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function getSSLDomains() : array
-    {
-        return(self::ARR_SSL_DOMAINS);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  getVerNum()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Get the Site version number
-    //
-    //  @return         string
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function getVerNum() : string
-    {
-        return(self::VER_NUM);
+        // Test for local / dev / stage / prod
+        $DotEnvLocal = new DotEnv('sites_local.list');
+        $arrLocalSites = $DotEnvLocal->getList();
+        foreach($arrLocalSites as $strSite) {
+            if ($strSite == $this->strServerName) {
+                putenv('SITE_LOCAL=1');
+                break;
+            }
+        }
+        
+        $DotEnvDev = new DotEnv('sites_dev.list');
+        $arrDevSites = $DotEnvDev->getList();
+        foreach($arrDevSites as $strSite) {
+            if ($strSite == $this->strServerName) {
+                putenv('SITE_STATE=DEV');
+                break;
+            }
+        }
+        
+        $DotEnvStage = new DotEnv('sites_stage.list');
+        $arrStageSites = $DotEnvStage->getList();
+        foreach($arrStageSites as $strSite) {
+            if ($strSite == $this->strServerName) {
+                putenv('SITE_STATE=STAGE');
+                break;
+            }
+        }
+        
+        $DotEnvProd = new DotEnv('sites_prod.list');
+        $arrProdSites = $DotEnvProd->getList();
+        foreach($arrProdSites as $strSite) {
+            if ($strSite == $this->strServerName) {
+                putenv('SITE_STATE=PROD');
+                break;
+            }
+        }
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  isDev()
-    //  Version 1.0 (19/05/2023)
+    //  Version 1.1 (06/03/2025)
     //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
@@ -441,31 +259,31 @@ class Site
     
     public static function isDev() : bool
     {
-        return(self::$bDev);
+        return(getenv('SITE_STATE') == 'DEV');
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  isStage()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  isLocal()
+    //  Version 1.1 (06/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Is stage version?
+    //  Is local version?
     //
     //  @return         bool
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    public static function isStage() : bool
+    public static function isLocal() : bool
     {
-        return(self::$bStage);
+        return(getenv('SITE_LOCAL') == '1');
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  isProd()
-    //  Version 1.0 (19/05/2023)
+    //  Version 1.1 (06/03/2025)
     //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
@@ -477,50 +295,32 @@ class Site
     
     public static function isProd() : bool
     {
-        return(self::$bProd);
+        return(getenv('SITE_STATE') == 'PROD');
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  isLocal()
-    //  Version 1.0 (19/05/2023)
+    //  isStage()
+    //  Version 1.1 (06/03/2025)
     //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Is local version?
+    //  Is stage version?
     //
     //  @return         bool
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    public static function isLocal() : bool
+    public static function isStage() : bool
     {
-        return(self::$bLocal);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  isSecure()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Is running over https or not?
-    //
-    //  @return         bool
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    public static function isSecure() : bool
-    {
-        return(self::$bSecure);
+        return(getenv('SITE_STATE') == 'STAGE');
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  setLang()
-    //  Version 1.1 (13/05/2024)
-    //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
+    //  Version 1.2 (06/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Set Site language
@@ -534,7 +334,7 @@ class Site
     
     public static function setLang(?string $strLang = null, int $iDurDays = null) : void
     {
-        $iDurDays   =   $iDurDays   ??  self::DEF_COOKIE_DURATION;
+        $iDurDays   =   $iDurDays   ??  intval(getenv('SITE_DEF_COOKIE_DURATION'));
         
         // lang already stored
         if (isCookie('lang'))
@@ -542,77 +342,77 @@ class Site
             $strLang ??= readCookie('lang');
         else
             // use new lang or default
-            $strLang ??= self::DEF_LANG;
+            $strLang ??= getenv('SITE_DEF_LANG');
+        
+        // Set environment variables per language
+        $DotEnvLang = new DotEnv('site_' . $strLang . '.env');
+        $DotEnvLang->load();
         
         addcookie('lang', $strLang, $iDurDays);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setServerName()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  setReadOnlyVariables()
+    //  Version 1.0 (05/03/2025)
+    //  @copyright  2025 © Derek Erb Solutions      (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  Set Site server name from site's URL
+    //  Set Site readonly variables
     //
     //  @return         void
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function setServerName() : void
+    function setReadOnlyVariables() : void
     {
-        $strServer = strtolower($_SERVER['SERVER_NAME']);
-        $strServer = (strStartsWith($strServer, 'www.') ? strRemoveLeft($strServer, 4) : $strServer);
+        $DotEnv = new DotEnv('site.env');
         
-        self::$strServerName = $strServer;
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  setSubTit()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Set Site subtitle
-    //
-    //  @param          string  $strSubTit  Site subtitle
-    //
-    //  @return         void
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function setSubTit(string $strSubTit) : void
-    {
-        self::$strSubTit = $strSubTit;
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    //  setTitle()
-    //  Version 1.1 (03/03/2024)
-    //  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
-    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
-    //
-    //  Set Site title
-    //
-    //  @param          string  $strTitle   Site Title
-    //
-    //  @return         void
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function setTitle(string $strTitle) : void
-    {
-        self::$strTitle = $strTitle;
+        // Set readonly variables
+        $this->strCopyright         =   getenv('SITE_COPYRIGHT') ?? '';
+        $this->strCopyrightSite     =   getenv('SITE_COPYRIGHTSITE') ?? '';
+        $this->strCSSDir            =   getenv('SITE_CSS_DIR') ?? '/css/';
+        $this->strCSSExpDir         =   getenv('SITE_CSS_EXP_DIR') ?? '/impexp/';
+        $this->strCSSImpDir         =   getenv('SITE_CSS_IMP_DIR') ?? '/impexp/';
+        $this->iDefCookieDuration   =   isBlank(getenv('SITE_DEF_COOKIE_DURATION')) ? 8 : intval(getenv('SITE_DEF_COOKIE_DURATION'));
+        $this->strDefLang           =   getenv('SITE_DEF_LANG') ?? 'en';
+        $this->iDefUserID           =   isBlank(getenv('SITE_USER_ID')) ? 1 : getenv('SITE_USER_ID');
+        $this->strFileBase          =   getenv('SITE_FILE_BASE') ?? '';
+        $this->strFontsDir          =   getenv('SITE_FONTS_DIR') ?? '/fonts/';
+        $this->strImagesDir         =   getenv('SITE_IMAGES_DIR') ?? '/imgs/';
+        $this->bImpExp              =   isBlank(getenv('SITE_IMPEXP')) ? false : boolval(getenv('SITE_IMPEXP'));
+        $this->strJSDir             =   getenv('SITE_JS_DIR') ?? '/js/';
+        $this->bPublished           =   isBlank(getenv('SITE_PUBLISHED')) ? false : boolval(getenv('SITE_PUBLISHED'));
+        $this->strVerNum            =   getenv('SITE_VER_NUM') ?? '0.00';
+        
+        // Set server name
+        $strServer                  =   strtolower($_SERVER['SERVER_NAME']);
+        $strServer                  =   (strStartsWith($strServer, 'www.') ? strRemoveLeft($strServer, 4) : $strServer);
+        $this->strServerName        =   $strServer;
+        $DotEnv->addEnv('SITE_SERVER_NAME', $strServer);
+        
+        // Check for secure
+        $bSecure = false;
+        if (isset($_SERVER['HTTPS'])) {
+            if (!empty($_SERVER['HTTPS'] && $_SERVER['HTTPS'] !== 'off')) {
+                $bSecure = true;
+            }
+        }
+        $this->bSecure = $bSecure;
+        
+        // Get protocol (http or https)
+        $this->strHttp = ($this->bSecure ? 'https' : 'http');
+        
+        // Set path
+        $DotEnv->addEnv('SITE_PATH', $_SERVER['DOCUMENT_ROOT']);
+        $DotEnv->addEnv('SITE_ROOT', $this->strHttp . '://' . $_SERVER['HTTP_HOST']);
     }
     
     //////////////////////////////////////////////////////////////////////////////
     //
     //  showAllCookies()
-    //  Version 1.0 (19/05/2023)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  Version 1.1 (06/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Show all of the Site cookies
@@ -623,7 +423,9 @@ class Site
     
     public static function showAllCookies() : void
     {
-        foreach(self::ARR_COOKIES as $strCookie) {
+        $DotEnvCookies = new DotEnv('cookies.list');
+        $arrCookies = $DotEnvCookies->getList();
+        foreach($arrCookies as $strCookie) {
             showCookie($strCookie);
         }
     }

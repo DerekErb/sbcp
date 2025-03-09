@@ -1,40 +1,29 @@
 <?php
 
-//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 //
-//  Footer Class
-//  Version 1.0
+//  CLASS       Footer
+//  @version    3.0 (09/03/2025)
+//  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+//  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
-//////////////////////////////////////////////////////////////////////////////
-    
+/////////////////////////////////////////////////////////////////////////////
 class Footer extends Site
 {
-    protected ?array    $arrJScriptFiles    =   null;
     //////////////////////////////////////////////////////////////////////////////
     //
-    //  setJScriptFiles()
+    //  write()
+    //  Version 2.0 (09/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
+    //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
-    //  $arrJScriptFiles    Either a comma-delimited list of JavaScript file names
-    //                      or a pre-declared array of JavaScript file names
+    //  Output page head
     //
-    //  Add additional JavaScript files to the header
-    //
-    //////////////////////////////////////////////////////////////////////////////
-    
-    function setJScriptFiles(string $JScriptFiles) : void
-    {
-        $this->arrJScriptFiles = explode(',', $JScriptFiles);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////////
-    //
-    // write()
-    //
-    // Output site page footer
+    //  @param      array   $arrJScriptFiles    Array of additional JavaScript files
     //
     //////////////////////////////////////////////////////////////////////////////
     
-    function write() : void
+    function write(?array $arrJScriptFiles = null) : void
     {
         $SBC = new SBC();
         
@@ -44,8 +33,8 @@ class Footer extends Site
         
         echo(t(1) . PHP_EOL . '<!-- *** FOOTER *** -->' . PHP_EOL);
         echo(t(1) . '<footer>' . PHP_EOL);
-            echo(t(2) . $SBC->getSiteTitle() . '<br>' . PHP_EOL);
-            echo(t(2) . 'Version ' . parent::VER_NUM . '<br>' . PHP_EOL);
+            echo(t(2) . getenv('SITE_TITLE') . '<br>' . PHP_EOL);
+            echo(t(2) . 'Version ' . getenv('SITE_VER_NUM') . '<br>' . PHP_EOL);
             
             echo(t(2) . '<address>' . PHP_EOL);
             
@@ -57,11 +46,11 @@ class Footer extends Site
         //////////////////////////////////////////////////////////////////////////////
         
         // Additional Javascript files
-        if (!is_null($this->arrJScriptFiles)) {
-            foreach($this->arrJScriptFiles as $strJScriptFile) {
-                $strJS = Site::JS_DIR . $strJScriptFile;
-                if (file_exists($this->getPath() . $strJS))
-                    echo(t(1) . '<script src="' . $strJS . '"></script>'. PHP_EOL);
+        if (!is_null($arrJScriptFiles)) {
+            foreach ($arrJScriptFiles as $strJScriptFile) {
+                $strJS = getenv('SITE_JS_DIR') . $strJScriptFile;
+                if (file_exists(getenv('SITE_PATH') . $strJS))
+                    echo(t(1) . '<script src="' . $strJS . '"></script>' . PHP_EOL);
             }
         }
         

@@ -16,6 +16,7 @@ error_reporting(E_ALL);
 $strLang = Site::getLang();
 
 $SBC = new SBC();
+
 $Head = new Head();
 $Head->addCSSFile('about.css');
 $Head->write();

@@ -3,22 +3,22 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       SBC
-//  @version    1.1 (12/04/2024)
+//  @version    1.2 (09/03/2025)
 //  @copyright  2024 © Derek Erb Solutions      (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
 /////////////////////////////////////////////////////////////////////////////
 
-enum SiteCode : string
+/*enum SiteCode : string
 {
     case FR     =   'CDLS';
     case EN     =   'ESBC';
     case GEN    =   'SBC';
 }
-
+*/
 class SBC extends Site
 {
-    protected   string  $strSiteTitle   =   '';
+//    protected   string  $strSiteTitle   =   '';
     
     //////////////////////////////////////////////////////////////////////////////
     //
@@ -29,7 +29,7 @@ class SBC extends Site
     
     function __construct()
     {
-        switch($this->getSite()) {
+/*        switch($this->getSite()) {
             case SiteCode::EN:
                 $this->setTitle('English Silent Book Club Paris');
                 break;
@@ -38,26 +38,64 @@ class SBC extends Site
                 break;
             default:
                 $this->setTitle('Silent Book Club Paris');
-                Site::setLang(Site::DEF_LANG);
+                Site::setLang(getenv('SITE_DEF_LANG'));
                 break;
         }
-
+*/
         parent::__construct();
     }
     
-    function getSite() : SiteCode
+    function getSiteCode() : string
+    {
+        return(getenv('SITE_CODE'));
+    }
+    
+/*    function getAltLinks(string $strLang) : array
+    {
+        // Return the alternate language link
+        if ($strLang === 'fr') {
+            $strLang    =   'en';
+            $strURL     =   'https://englishsilentbookclub.paris';
+            $strTitle   =   'English Silent Book Club Paris';
+        }
+        else {
+            $strLang    =   'fr';
+            $strURL     =   'https://clubdelecturesilencieuse.paris';
+            $strTitle   =   'Club de lecture silencieuse Paris';
+        }
+        
+        return(array(
+            'AltLang'   =>  $strLang,
+            'AltURL'    =>  $strURL,
+            'AltTitle'  =>  $strTitle,
+            )
+        );
+    }*/
+    
+/*    function getSite() : SiteCode
     {
         $Site = new Site();
-        if (strContains($Site->getServerName(), 'clubdelecture')) {
+        if (strContains(getenv('SITE_SERVER_NAME'), 'clubdelecture')) {
             Site::setLang('fr');
             return (SiteCode::FR);
         }
-        if (strContains($Site->getServerName(), 'englishsilentbookclub')) {
+        if (strContains(getenv('SITE_SERVER_NAME'), 'englishsilentbookclub')) {
             Site::setLang('en');
             return (SiteCode::EN);
         }
         return(SiteCode::GEN);
+    }*/
+    
+/*    function setTitle($strTitle) : void
+    {
+        $strTitle = getenv('SITE_TITLE');
     }
+    
+    function getSiteTitle() : string
+    {
+        return(getenv('SITE_TITLE'));
+    }*/
+
     
     //////////////////////////////////////////////////////////////////////////////
     //
@@ -69,11 +107,7 @@ class SBC extends Site
     
     function writeHeader() : void
     {
-        echo(t(1) . '<header>' . PHP_EOL);
-            echo(t(2) . '<div id="headtitle">' . PHP_EOL);
-                echo(t(3) . '<h1 translate="no">' . $this->getSiteTitle() . '</h1>' . PHP_EOL);
-            echo(t(2) . '</div>' . PHP_EOP);
-        echo(t(1) . '</header>' . PHP_EOP);
+        $Header = new Header();
+        $Header->write();
     }
-    
 }

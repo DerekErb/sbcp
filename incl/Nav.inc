@@ -3,8 +3,8 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //  CLASS       Nav
-//  @version    2.2 (04/05/2024)
-//  @copyright  2023-2024 © Derek Erb Solutions (https://derekerb.solutions)
+//  @version    2.3 (07/03/2025)
+//  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
 //  @author     Derek Erb Solutions             (https://derekerb.solutions)
 //
 /////////////////////////////////////////////////////////////////////////////
@@ -75,8 +75,8 @@ class Nav
     /////////////////////////////////////////////////////////////////////////////
     //
     //  write()
-    //  @version    1.0 (30/04/2024)
-    //  @copyright  2023 © Derek Erb Solutions      (https://derekerb.solutions)
+    //  @version    1.1 (07/03/2025)
+    //  @copyright  2023-2025 © Derek Erb Solutions (https://derekerb.solutions)
     //  @author     Derek Erb Solutions             (https://derekerb.solutions)
     //
     //  Output the navigation
@@ -95,21 +95,19 @@ class Nav
         
         $arrFolders['NavAbout']             =   'about';
         $arrFolders['NavNewsletter']        =   'newsletter';
-        $arrFolders['NavContact']           =   'contact';
         $arrFolders['NavSummaries']         =   'summaries';
         
         $SBC = new SBC();
-        switch($SBC->getSite()) {
-            case SiteCode::FR:
+        $strLang = Site::getLang();
+        switch($strLang) {
+            case 'fr':
                 $arrMenu['NavAbout']        =   "C'est quoi";
                 $arrMenu['NavNewsletter']   =   'Newsletter';
-                $arrMenu['NavContact']      =   'Contact';
 //                $arrMenu['NavSummaries']    =   'Résumés';
                 break;
             default:
                 $arrMenu['NavAbout']        =   'About';
                 $arrMenu['NavNewsletter']   =   'Newsletter';
-                $arrMenu['NavContact']      =   'Contact';
 //                $arrMenu['NavSummaries']    =   'Summaries';
                 break;
         }
