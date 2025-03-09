@@ -22,7 +22,7 @@ $Nav = new Nav();
 $Nav->write('Summaries');
 
 // Session Summaries
-if ($SBC->getSite() === SiteCode::FR) {
+if ($SBC->getSiteLang() === 'fr') {
     echo(t(1) . '<section id="summaries">' . PHP_EOL);
         echo('<h2>Résumés des Sessions</h2>' . PHP_EOL);
     echo(t(1) . '</section>' . PHP_EOP);

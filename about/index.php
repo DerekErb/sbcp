@@ -18,7 +18,7 @@ $strLang = Site::getLang();
 $SBC = new SBC();
 
 $Head = new Head();
-$Head->addCSSFile('about.css');
+$Head->setCSSFiles('about.css');
 $Head->write();
 
 $SBC->writeHeader();
